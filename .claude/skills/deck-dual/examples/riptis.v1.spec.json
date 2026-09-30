@@ -265,47 +265,6 @@
    "notes": "Un MVP centré sur l’import et la recherche, puis des extensions successives. Seul développeur, j’ai aussi animé la collecte du besoin avec l’équipe réseau et coordonné les accès avec l’IT et l’Infra."
   },
   {
-   "id": "app",
-   "label": "Résultats",
-   "layout": "image_list",
-   "data": {
-    "title": "RIPTIS en production le 20 août 2026",
-    "image": "dashboard.png",
-    "alt": "Tableau de bord d’accueil de RIPTIS : 2 432 matrices centralisées",
-    "head": "2 432 matrices",
-    "bullets": [
-     "Import Excel multi-formats",
-     "Recherche multicritère",
-     "Recherche DNS",
-     "Droits par OIDC",
-     "Export Excel",
-     "Sauvegarde PostgreSQL"
-    ]
-   },
-   "notes": "Sept livrables : application web, import Excel, recherche multicritère, recherche DNS, gestion des utilisateurs, export et sauvegarde. Mise en production le 20 août 2026 sur Docker, Jenkins et Kubernetes."
-  },
-  {
-   "id": "demo",
-   "label": "Résultats",
-   "layout": "images2",
-   "data": {
-    "title": "Une recherche IP en quelques secondes",
-    "items": [
-     {
-      "image": "search.png",
-      "alt": "Recherche multicritère par IP : 2 fichiers trouvés avec le détail de la route",
-      "caption": "Recherche multicritère : 2 fichiers sur 2 432 matrices, route détaillée"
-     },
-     {
-      "image": "dns.png",
-      "alt": "Recherche DNS : adresse IPv4 et alias CNAME",
-      "caption": "Recherche DNS : enrichissement des résultats"
-     }
-    ]
-   },
-   "notes": "Cas réel, identifiants masqués : une recherche d’adresse IP sur l’ensemble de la base retourne instantanément les deux fichiers concernés, avec la route correspondante. La recherche DNS enrichit les résultats."
-  },
-  {
    "id": "planning",
    "label": "Démarche",
    "layout": "image_facts",
@@ -347,6 +306,47 @@
     "bar": "Arbitrage : privilégier la robustesse du moteur d’import plutôt que le calendrier initial."
    },
    "notes": "Le premier imprévu a été limité par une demande d’accès anticipée. Le second m’a conduit à généraliser le moteur d’import plutôt que traiter les fichiers un par un : c’est ce choix qui explique le mois de retard, validé avec mon maître d’apprentissage."
+  },
+  {
+   "id": "app",
+   "label": "Résultats",
+   "layout": "image_list",
+   "data": {
+    "title": "RIPTIS en production le 20 août 2026",
+    "image": "dashboard.png",
+    "alt": "Tableau de bord d’accueil de RIPTIS : 2 432 matrices centralisées",
+    "head": "2 432 matrices",
+    "bullets": [
+     "Import Excel multi-formats",
+     "Recherche multicritère",
+     "Recherche DNS",
+     "Droits par OIDC",
+     "Export Excel",
+     "Sauvegarde PostgreSQL"
+    ]
+   },
+   "notes": "Sept livrables : application web, import Excel, recherche multicritère, recherche DNS, gestion des utilisateurs, export et sauvegarde. Mise en production le 20 août 2026 sur Docker, Jenkins et Kubernetes."
+  },
+  {
+   "id": "demo",
+   "label": "Résultats",
+   "layout": "images2",
+   "data": {
+    "title": "Une recherche IP en quelques secondes",
+    "items": [
+     {
+      "image": "search.png",
+      "alt": "Recherche multicritère par IP : 2 fichiers trouvés avec le détail de la route",
+      "caption": "Recherche multicritère : 2 fichiers sur 2 432 matrices, route détaillée"
+     },
+     {
+      "image": "dns.png",
+      "alt": "Recherche DNS : adresse IPv4 et alias CNAME",
+      "caption": "Recherche DNS : enrichissement des résultats"
+     }
+    ]
+   },
+   "notes": "Cas réel, identifiants masqués : une recherche d’adresse IP sur l’ensemble de la base retourne instantanément les deux fichiers concernés, avec la route correspondante. La recherche DNS enrichit les résultats."
   },
   {
    "id": "kpi",
