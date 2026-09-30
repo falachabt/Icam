@@ -129,13 +129,13 @@ const LAYOUT = {
       o.text(x + 36, y + 20, 744, 110, c.value, { font: 'H', size: 96, bold: true, lh: 1.1, color: th.accent }); o.text(x + 36, y + 140, 744, 96, c.text, { size: 32, lh: 1.3 }); });
     if (d.note) o.text(128, 840, 1664, 70, d.note, { size: 24, color: th.muted, lh: 1.4 });
   },
-  rows(o, d) { // up to 5 numbered rows; item = "text" or {t, badge:"VALIDÉ · PROCHAINS JOURS"} (tinted row + accent pill)
+  rows(o, d) { // up to 5 numbered rows; item = "text" or {t, badge:"VALIDÉ" (put validated items last)} (tinted row + accent pill)
     o.title(d.title);
     d.items.forEach((it, i) => { const y = 250 + i * 116, t = it.t || it, b = it.badge;
-      o.rect(128, y, 96, 96, { fill: th.ink, line: null });
+      o.rect(128, y, 96, 96, { fill: th.ink }); // same 4px ink border as the text card, so both have identical outer height
       o.text(128, y, 96, 96, String(i + 1).padStart(2, '0'), { font: 'H', size: 40, bold: true, color: th.paper, align: 'center', valign: 'middle' });
-      o.rect(224, y, 1568, 96, { fill: b ? th.tint : th.card }); o.text(256, y, b ? 1050 : 1510, 96, t, { size: 32, valign: 'middle', lh: 1.25 });
-      if (b) { o.rect(1340, y + 14, 430, 68, { fill: th.accent, line: null }); o.text(1340, y + 14, 430, 68, b, { font: 'M', size: 24, bold: true, color: th.paper, align: 'center', valign: 'middle', spacing: 1 }); } });
+      o.rect(224, y, 1568, 96, { fill: b ? th.tint : th.card }); o.text(256, y, b ? 1260 : 1510, 96, t, { size: 32, valign: 'middle', lh: 1.25 });
+      if (b) { o.rect(1564, y + 16, 200, 64, { fill: th.accent, line: null }); o.text(1564, y + 16, 200, 64, b, { font: 'M', size: 24, bold: true, color: th.paper, align: 'center', valign: 'middle', spacing: 2 }); } });
   },
   closing(o, d) { // conclusion list + big thanks; chrome is "big"
     o.title(d.title); o.label(128, 330, 900, d.label || '');

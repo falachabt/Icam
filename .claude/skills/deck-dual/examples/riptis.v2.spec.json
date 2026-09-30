@@ -1,6 +1,6 @@
 {
  "title": "Soutenance RIPTIS",
- "filename": "Presentation_RIPTIS_v2",
+ "filename": "Presentation_RIPTIS",
  "theme": {
   "ink": "16181D",
   "paper": "F3F0E8",
@@ -531,20 +531,20 @@
    "data": {
     "title": "Perspectives d’évolution",
     "items": [
-     {
-      "t": "Formaliser la politique de sauvegarde (fréquence, conservation, tests de restauration)",
-      "badge": "VALIDÉ · PROCHAINS JOURS"
-     },
      "Mesurer sur le terrain le temps de recherche et la satisfaction",
      "Étendre le moteur d’import aux nouveaux formats de fichiers",
      "Enrichir la recherche avec d’autres sources réseau, au-delà du DNS",
      {
+      "t": "Formaliser la politique de sauvegarde (fréquence, conservation, tests de restauration)",
+      "badge": "VALIDÉ"
+     },
+     {
       "t": "Développer des tableaux de bord de type Grafana",
-      "badge": "VALIDÉ · PROCHAINS JOURS"
+      "badge": "VALIDÉ"
      }
     ]
    },
-   "notes": "Deux éléments sont à consolider après la fin de l’alternance : la politique de sauvegarde et la mise à jour du moteur d’import."
+   "notes": "Deux éléments sont à consolider après la fin de l’alternance : la politique de sauvegarde et la mise à jour du moteur d’import. Les deux dernières perspectives (sauvegarde, tableaux de bord) sont déjà validées avec le manager pour les prochaines mises à jour de l’outil."
   },
   {
    "id": "end",
