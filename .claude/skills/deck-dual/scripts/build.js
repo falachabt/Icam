@@ -135,7 +135,7 @@ const LAYOUT = {
       o.rect(128, y, 96, 96, { fill: th.ink }); // same 4px ink border as the text card, so both have identical outer height
       o.text(128, y, 96, 96, String(i + 1).padStart(2, '0'), { font: 'H', size: 40, bold: true, color: th.paper, align: 'center', valign: 'middle' });
       o.rect(224, y, 1568, 96, { fill: b ? th.tint : th.card }); o.text(256, y, b ? 1260 : 1510, 96, t, { size: 32, valign: 'middle', lh: 1.25 });
-      if (b) { o.rect(1564, y + 16, 200, 64, { fill: th.accent, line: null }); o.text(1564, y + 16, 200, 64, b, { font: 'M', size: 24, bold: true, color: th.paper, align: 'center', valign: 'middle', spacing: 2 }); } });
+      if (b) { o.rect(1604, y + 24, 160, 48, { fill: th.accent, line: null }); o.text(1604, y + 24, 160, 48, b, { font: 'M', size: 24, bold: true, color: th.paper, align: 'center', valign: 'middle', spacing: 2 }); } });
   },
   closing(o, d) { // conclusion list + big thanks; chrome is "big"
     o.title(d.title); o.label(128, 330, 900, d.label || '');

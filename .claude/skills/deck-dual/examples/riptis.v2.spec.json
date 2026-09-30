@@ -535,7 +535,7 @@
      "Étendre le moteur d’import aux nouveaux formats de fichiers",
      "Enrichir la recherche avec d’autres sources réseau, au-delà du DNS",
      {
-      "t": "Formaliser la politique de sauvegarde (fréquence, conservation, tests de restauration)",
+      "t": "Formaliser la sauvegarde : fréquence, conservation, restauration",
       "badge": "VALIDÉ"
      },
      {
