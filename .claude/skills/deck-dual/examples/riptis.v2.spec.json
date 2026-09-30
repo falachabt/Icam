@@ -499,18 +499,19 @@
     "title": "Compétences et retour critique",
     "left": {
      "title": "Compétences",
-     "h": 520,
+     "h": 580,
      "bullets": [
       "Conception complète d’une application web",
       "Authentification OIDC et déploiement Kubernetes",
       "Moteur d’import générique sur données hétérogènes",
-      "Co-pilotage : backlog, arbitrages, coordination"
+      "Co-pilotage : backlog, arbitrages, coordination",
+      "Travail en équipe : réseau, IT/Infra, maître d’apprentissage"
      ]
     },
     "right": {
      "title": "Retour critique",
      "dark": true,
-     "h": 520,
+     "h": 580,
      "paras": [
       {
        "t": "Pas de chronométrage avant/après dès le cadrage : les gains reposent sur une estimation."
