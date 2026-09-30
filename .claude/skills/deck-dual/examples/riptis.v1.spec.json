@@ -497,11 +497,11 @@
    "layout": "closing",
    "data": {
     "title": "Conclusion",
-    "label": "Trois préconisations",
+    "label": "À retenir",
     "items": [
-     "Instrumenter la mesure d’impact dès le lancement du projet",
-     "Prévoir une marge pour l’hétérogénéité des données historiques",
-     "Ouvrir RIPTIS à d’autres outils réseau"
+     "Un besoin réel comblé : 2 432 matrices centralisées et consultables en quelques secondes",
+     "Mise en production le 20 août 2026, avec un mois de décalage assumé pour la robustesse de l’import",
+     "Une expérience de co-pilotage technique en autonomie, transférable au métier d’ingénieur"
     ],
     "thanks": "Merci."
    },
