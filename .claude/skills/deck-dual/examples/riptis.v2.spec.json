@@ -1,0 +1,566 @@
+{
+ "title": "Soutenance RIPTIS",
+ "filename": "Presentation_RIPTIS_v2",
+ "theme": {
+  "ink": "16181D",
+  "paper": "F3F0E8",
+  "card": "FBF9F3",
+  "accent": "0B4F7A",
+  "tint": "DCE6EE",
+  "muted": "4B5159",
+  "fonts": {
+   "H": "Space Grotesk",
+   "B": "IBM Plex Sans",
+   "M": "JetBrains Mono"
+  }
+ },
+ "logos": [
+  {
+   "file": "icam.png",
+   "ratio": 1.84,
+   "alt": "Logo Icam"
+  },
+  {
+   "file": "transactis.png",
+   "ratio": 6.18,
+   "alt": "Logo Transactis"
+  }
+ ],
+ "sections": [
+  {
+   "description": "Présentation du projet",
+   "start": "cover"
+  },
+  {
+   "description": "Contexte et problématique",
+   "start": "ctx"
+  },
+  {
+   "description": "Démarche et pilotage",
+   "start": "sol"
+  },
+  {
+   "description": "Résultats et livrables",
+   "start": "app"
+  },
+  {
+   "description": "Bilan et perspectives",
+   "start": "smart"
+  }
+ ],
+ "slides": [
+  {
+   "id": "cover",
+   "label": "Soutenance",
+   "layout": "cover",
+   "data": {
+    "kicker": "Rapport de réalisation · Icam × Transactis",
+    "title": "RIPTIS",
+    "subtitle": "Application web de centralisation des flux réseau",
+    "author": "TENEZEU VOUFO Benny Dieudonne",
+    "lines": [
+     "SNI4 2027 · Mars – août 2026",
+     "Pierre JOCHUM, maître d’apprentissage",
+     "Roger GROULT, tuteur académique"
+    ]
+   },
+   "notes": "Bonjour. Je présente RIPTIS, l’application web que j’ai conçue, développée et mise en production chez Transactis entre mars et août 2026, en alternance."
+  },
+  {
+   "id": "plan",
+   "label": "Plan",
+   "layout": "cards",
+   "data": {
+    "title": "Plan de la présentation",
+    "cards": [
+     {
+      "label": "01",
+      "title": "Contexte",
+      "text": "Transactis, flux réseau et problématique"
+     },
+     {
+      "label": "02",
+      "title": "Démarche",
+      "text": "Solutions, méthode et planning"
+     },
+     {
+      "label": "03",
+      "title": "Résultats",
+      "text": "Livrables, démonstration et chiffres"
+     },
+     {
+      "label": "04",
+      "title": "Bilan",
+      "text": "Objectifs, compétences et perspectives"
+     }
+    ]
+   },
+   "notes": "Quatre temps : le contexte, la démarche, les résultats, puis le bilan."
+  },
+  {
+   "id": "ctx",
+   "label": "Contexte",
+   "layout": "stats",
+   "data": {
+    "title": "Un besoin au cœur d’un opérateur de paiement",
+    "titleLines": 2,
+    "stats": [
+     {
+      "value": "35 %",
+      "text": "des transactions bancaires françaises traitées chaque mois par Transactis"
+     },
+     {
+      "value": "2 400+",
+      "text": "fichiers Excel : impossible de savoir dans lequel se trouve l’information"
+     },
+     {
+      "value": "2003",
+      "text": "année des plus anciens fichiers encore utilisés"
+     }
+    ],
+    "note": "Chaque flux réseau autorisé doit être tracé et justifiable : audits de sécurité, conformité réglementaire."
+   },
+   "notes": "Transactis est co-fondé par La Banque Postale et la Société Générale. Avant le projet, une recherche d’IP, de port ou de règle VPN obligeait à chercher dans plus de 2 400 fichiers Excel, sans savoir dans lequel se trouvait l’information."
+  },
+  {
+   "id": "pb",
+   "label": "Problématique",
+   "layout": "statement",
+   "data": {
+    "label": "Problématique retenue",
+    "quote": "Comment centraliser et rendre rapidement exploitables des données réseaux réparties dans plusieurs dizaines ou centaines de fichiers Excel hétérogènes, tout en respectant les contraintes de sécurité d’un environnement bancaire ?",
+    "tags": [
+     "Axe 1 · Centralisation",
+     "Axe 2 · Sécurité"
+    ]
+   },
+   "notes": "La problématique de la note de cadrage est restée valide a posteriori : centralisation et sécurité ont bien été les deux axes structurants."
+  },
+  {
+   "id": "sol",
+   "label": "Démarche",
+   "layout": "matrix",
+   "data": {
+    "title": "Trois pistes comparées, une retenue",
+    "cols": [
+     {
+      "t": "Critère",
+      "w": 640
+     },
+     {
+      "t": "Poids",
+      "w": 140,
+      "align": "center"
+     },
+     {
+      "t": "Excel réorganisé",
+      "w": 295,
+      "align": "center"
+     },
+     {
+      "t": "IPAM / CMDB",
+      "w": 295,
+      "align": "center"
+     },
+     {
+      "t": "Application interne",
+      "w": 294,
+      "align": "center"
+     }
+    ],
+    "rows": [
+     [
+      "Réponse au besoin de recherche",
+      "×3",
+      "1",
+      "2",
+      "3"
+     ],
+     [
+      "Adaptation au format des matrices",
+      "×3",
+      "2",
+      "1",
+      "3"
+     ],
+     [
+      "Délai et coût de mise en œuvre",
+      "×2",
+      "3",
+      "1",
+      "2"
+     ],
+     [
+      "Intégration à la stack Transactis",
+      "×2",
+      "2",
+      "2",
+      "3"
+     ],
+     [
+      "Faible charge de maintenance",
+      "×1",
+      "3",
+      "2",
+      "1"
+     ],
+     [
+      "Total pondéré (sur 33)",
+      "",
+      "22",
+      "17",
+      "29"
+     ]
+    ],
+    "totalRow": true,
+    "boldCols": [
+     4
+    ],
+    "conclusion": "Application interne : 29 / 33, la meilleure réponse au besoin et aux formats Transactis",
+    "note": "Notation de 1 (faible) à 3 (fort), multipliée par le poids du critère."
+   },
+   "notes": "Trois pistes comparées avec une matrice multicritère pondérée : garder Excel, acheter un outil IPAM/CMDB, ou développer en interne. L’application sur mesure obtient 29 points sur 33 : elle colle aux formats existants sans migration lourde et reste cohérente avec l’écosystème Transactis. Notes et poids : mon appréciation."
+  },
+  {
+   "id": "met",
+   "label": "Démarche",
+   "layout": "twocols",
+   "data": {
+    "title": "Un MVP itératif en co-pilotage",
+    "left": {
+     "title": "Méthode",
+     "bullets": [
+      "Backlog priorisé avec le maître d’apprentissage",
+      "Suivi Kanban bimensuel",
+      "Cycles courts : import, recherche, permissions, DNS, export, sauvegarde",
+      "Phase de test utilisateur avant la production"
+     ]
+    },
+    "right": {
+     "title": "Stack Transactis",
+     "kv": [
+      [
+       "Front",
+       [
+        {
+         "n": "Next.js",
+         "logo": "nextdotjs.png"
+        },
+        {
+         "n": "React",
+         "logo": "react.png"
+        },
+        {
+         "n": "TypeScript",
+         "logo": "typescript.png"
+        }
+       ]
+      ],
+      [
+       "Back",
+       [
+        {
+         "n": "Node.js",
+         "logo": "nodedotjs.png"
+        },
+        {
+         "n": "Express",
+         "logo": "express.png"
+        }
+       ]
+      ],
+      [
+       "Données",
+       [
+        {
+         "n": "PostgreSQL",
+         "logo": "postgresql.png"
+        },
+        {
+         "n": "Sequelize",
+         "logo": "sequelize.png"
+        }
+       ]
+      ],
+      [
+       "Auth",
+       [
+        {
+         "n": "OIDC",
+         "logo": "openid.png"
+        }
+       ]
+      ],
+      [
+       "Déploiement",
+       [
+        {
+         "n": "Docker",
+         "logo": "docker.png"
+        },
+        {
+         "n": "Jenkins",
+         "logo": "jenkins.png"
+        },
+        {
+         "n": "Kubernetes",
+         "logo": "kubernetes.png"
+        }
+       ]
+      ]
+     ]
+    }
+   },
+   "notes": "Un MVP centré sur l’import et la recherche, puis des extensions successives. Seul développeur, j’ai aussi animé la collecte du besoin avec l’équipe réseau et coordonné les accès avec l’IT et l’Infra."
+  },
+  {
+   "id": "app",
+   "label": "Résultats",
+   "layout": "image_list",
+   "data": {
+    "title": "RIPTIS en production le 20 août 2026",
+    "image": "dashboard.png",
+    "alt": "Tableau de bord d’accueil de RIPTIS : 2 432 matrices centralisées",
+    "head": "2 432 matrices",
+    "bullets": [
+     "Import Excel multi-formats",
+     "Recherche multicritère",
+     "Recherche DNS",
+     "Droits par OIDC",
+     "Export Excel",
+     "Sauvegarde PostgreSQL"
+    ]
+   },
+   "notes": "Sept livrables : application web, import Excel, recherche multicritère, recherche DNS, gestion des utilisateurs, export et sauvegarde. Mise en production le 20 août 2026 sur Docker, Jenkins et Kubernetes."
+  },
+  {
+   "id": "demo",
+   "label": "Résultats",
+   "layout": "images2",
+   "data": {
+    "title": "Une recherche IP en quelques secondes",
+    "items": [
+     {
+      "image": "search.png",
+      "alt": "Recherche multicritère par IP : 2 fichiers trouvés avec le détail de la route",
+      "caption": "Recherche multicritère : 2 fichiers sur 2 432 matrices, route détaillée"
+     },
+     {
+      "image": "dns.png",
+      "alt": "Recherche DNS : adresse IPv4 et alias CNAME",
+      "caption": "Recherche DNS : enrichissement des résultats"
+     }
+    ]
+   },
+   "notes": "Cas réel, identifiants masqués : une recherche d’adresse IP sur l’ensemble de la base retourne instantanément les deux fichiers concernés, avec la route correspondante. La recherche DNS enrichit les résultats."
+  },
+  {
+   "id": "planning",
+   "label": "Démarche",
+   "layout": "image_facts",
+   "data": {
+    "title": "Un mois de décalage en fin de projet",
+    "image": "gantt.png",
+    "alt": "Planning prévisionnel et réalisé sur la même échelle de temps",
+    "facts": [
+     {
+      "label": "Prévu",
+      "value": "Juillet 2026"
+     },
+     {
+      "label": "Réalisé",
+      "value": "20 août 2026"
+     }
+    ]
+   },
+   "notes": "Cadrage, développement et tests sont conformes au prévisionnel. L’écart d’environ un mois vient d’une seule cause : le volume de cas particuliers découverts pendant les tests, qui a ajouté une étape de traitement et décalé la stabilisation."
+  },
+  {
+   "id": "risk",
+   "label": "Démarche",
+   "layout": "callout",
+   "data": {
+    "title": "Deux imprévus, un arbitrage",
+    "cards": [
+     {
+      "label": "Imprévu 01",
+      "title": "Accès et droits",
+      "text": "Autorisations nécessaires avant de pouvoir développer et tester. Demande anticipée dès mars 2026."
+     },
+     {
+      "label": "Imprévu 02",
+      "title": "Fichiers hétérogènes",
+      "text": "Structures variées, jusqu’à 2003. Une vingtaine de fichiers particuliers identifiés en test."
+     }
+    ],
+    "bar": "Arbitrage : privilégier la robustesse du moteur d’import plutôt que le calendrier initial."
+   },
+   "notes": "Le premier imprévu a été limité par une demande d’accès anticipée. Le second m’a conduit à généraliser le moteur d’import plutôt que traiter les fichiers un par un : c’est ce choix qui explique le mois de retard, validé avec mon maître d’apprentissage."
+  },
+  {
+   "id": "kpi",
+   "label": "Résultats",
+   "layout": "kpi",
+   "data": {
+    "title": "Des gains estimés à confirmer",
+    "stats": [
+     {
+      "value": "30 s",
+      "text": "au lieu de 30–50 min pour retrouver une information"
+     },
+     {
+      "value": "−98,8 %",
+      "text": "de temps de recherche (estimation)"
+     },
+     {
+      "value": "× 30",
+      "text": "recherches par heure : 1,5 → 120"
+     },
+     {
+      "value": "≈ 21 400 €",
+      "text": "de temps libéré par an et par utilisateur (50 €/h)"
+     }
+    ],
+    "note": "Estimation de travail (moyenne de 40 minutes avant RIPTIS, environ 12 recherches par semaine) : aucun chronométrage n’a été réalisé avant le projet."
+   },
+   "notes": "Ces chiffres sont des estimations, pas des mesures. Gain relatif = (40 − 0,5) / 40 = 98,8 %. Environ 8 heures économisées par semaine, soit 428 heures par an. Le coût horaire de 50 € est indicatif."
+  },
+  {
+   "id": "smart",
+   "label": "Bilan",
+   "layout": "matrix",
+   "data": {
+    "title": "Bilan des objectifs initiaux",
+    "size": 30,
+    "headH": 68,
+    "rowH": 68,
+    "cols": [
+     {
+      "t": "Objectif",
+      "w": 34
+     },
+     {
+      "t": "Résultat",
+      "w": 48
+     },
+     {
+      "t": "Statut",
+      "w": 18
+     }
+    ],
+    "boldCols": [
+     2
+    ],
+    "rows": [
+     [
+      "Centraliser les matrices",
+      "Import validé sur les fichiers testés",
+      "Atteint"
+     ],
+     [
+      "Gérer les formats historiques",
+      "~20 fichiers particuliers traités",
+      "Atteint"
+     ],
+     [
+      "Sécuriser l’accès",
+      "OIDC, rôles et permissions actifs",
+      "Atteint"
+     ],
+     [
+      "Préserver les données",
+      "Sauvegarde en place, procédure à écrire",
+      "Partiel"
+     ],
+     [
+      "Recherche −70 %",
+      "−98,8 % estimé, à chronométrer",
+      "À mesurer"
+     ],
+     [
+      "Satisfaction ≥ 80 %",
+      "Retours positifs, sans mesure formelle",
+      "À mesurer"
+     ],
+     [
+      "Réponse < 2 secondes",
+      "Indexation PostgreSQL, à mesurer",
+      "À mesurer"
+     ]
+    ]
+   },
+   "notes": "Les objectifs de sécurité et de centralisation sont atteints. Les objectifs quantitatifs reposent encore sur des estimations : la clôture du projet doit produire les mesures définitives."
+  },
+  {
+   "id": "skills",
+   "label": "Bilan",
+   "layout": "twocols",
+   "data": {
+    "title": "Compétences et retour critique",
+    "left": {
+     "title": "Compétences",
+     "h": 520,
+     "bullets": [
+      "Conception complète d’une application web",
+      "Authentification OIDC et déploiement Kubernetes",
+      "Moteur d’import générique sur données hétérogènes",
+      "Co-pilotage : backlog, arbitrages, coordination"
+     ]
+    },
+    "right": {
+     "title": "Retour critique",
+     "dark": true,
+     "h": 520,
+     "paras": [
+      {
+       "t": "Pas de chronométrage avant/après dès le cadrage : les gains reposent sur une estimation."
+      },
+      {
+       "t": "La mesure d’impact aurait dû être instrumentée dès la note de cadrage.",
+       "bold": true
+      }
+     ]
+    }
+   },
+   "notes": "Techniquement, la conception du moteur d’import a été la difficulté la plus formatrice. Côté gestion de projet, ma principale limite est de ne pas avoir instrumenté la mesure d’impact dès le début."
+  },
+  {
+   "id": "next",
+   "label": "Bilan",
+   "layout": "rows",
+   "data": {
+    "title": "Perspectives d’évolution",
+    "items": [
+     {
+      "t": "Formaliser la politique de sauvegarde (fréquence, conservation, tests de restauration)",
+      "badge": "VALIDÉ · PROCHAINS JOURS"
+     },
+     "Mesurer sur le terrain le temps de recherche et la satisfaction",
+     "Étendre le moteur d’import aux nouveaux formats de fichiers",
+     "Enrichir la recherche avec d’autres sources réseau, au-delà du DNS",
+     {
+      "t": "Développer des tableaux de bord de type Grafana",
+      "badge": "VALIDÉ · PROCHAINS JOURS"
+     }
+    ]
+   },
+   "notes": "Deux éléments sont à consolider après la fin de l’alternance : la politique de sauvegarde et la mise à jour du moteur d’import."
+  },
+  {
+   "id": "end",
+   "label": "Conclusion",
+   "layout": "closing",
+   "data": {
+    "title": "Conclusion",
+    "label": "Trois préconisations",
+    "items": [
+     "Instrumenter la mesure d’impact dès le lancement du projet",
+     "Prévoir une marge pour l’hétérogénéité des données historiques",
+     "Ouvrir RIPTIS à d’autres outils réseau"
+    ],
+    "thanks": "Merci."
+   },
+   "notes": "RIPTIS répond au besoin identifié : centraliser des données réseau dispersées, dans le respect des contraintes d’un environnement bancaire. Mise en production le 20 août 2026. Je suis à votre disposition pour vos questions."
+  }
+ ]
+}
