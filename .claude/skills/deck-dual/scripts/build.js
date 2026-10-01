@@ -102,10 +102,11 @@ const LAYOUT = {
       if (c.paras) { let y = 370; c.paras.forEach(p => { o.text(x + 36, y, 740, 170, p.t, { size: 32, lh: 1.3, bold: !!p.bold, color: fg }); y += 190; }); }
     });
   },
-  image_list(o, d) { // screenshot left, heading + bullets right
+  image_list(o, d) { // screenshot left; right = heading + bullets, or heading + labelled groups [{label,bullets}]
     o.title(d.title); o.pic(128, 250, d.w || 960, d.h || 637, d.image, d.alt);
     o.text(1136, 250, 656, 56, d.head, { font: 'H', size: 40, bold: true, color: th.accent, tag: 'h3' });
-    o.text(1136, 340, 656, 420, '', { bullets: d.bullets, size: 32, lh: 1.3 });
+    if (d.groups) { let y = 322; d.groups.forEach(g => { o.label(1136, y, 656, g.label); o.text(1136, y + 40, 656, g.bullets.length * 46 + 10, '', { bullets: g.bullets, size: 28, lh: 1.3 }); y += 40 + g.bullets.length * 46 + 36; }); }
+    else o.text(1136, 340, 656, 420, '', { bullets: d.bullets, size: 32, lh: 1.3 });
   },
   images2(o, d) { // two screenshots + captions
     o.title(d.title);
@@ -115,13 +116,15 @@ const LAYOUT = {
     o.title(d.title); o.pic(128, 250, d.w || 1100, d.h || 571, d.image, d.alt);
     d.facts.forEach((f, i) => { const y = 250 + i * 244; o.card(1276, y, 516, 220); o.label(1312, y + 40, 440, f.label); o.text(1312, y + 100, 440, 64, f.value, { font: 'H', size: 40, bold: true }); });
   },
-  callout(o, d) { // two cards + full-width ink bar
+  callout(o, d) { // 2-3 cards + full-width ink bar
     o.title(d.title);
-    d.cards.forEach((c, i) => { const x = 128 + i * 852; o.card(x, 250, 812, 400);
-      o.label(x + 36, 286, 600, c.label); o.text(x + 36, 336, 700, 56, c.title, { font: 'H', size: 40, bold: true, tag: 'h3' });
-      o.text(x + 36, 420, 740, 200, c.text, { size: 32, lh: 1.3 }); if (c.icon) o.icon(x + 812 - 36 - 48, 280, 48, c.icon); });
-    o.rect(128, 720, 1664, 160, { fill: th.ink, line: null });
-    o.text(168, 720, 1584, 160, d.bar, { font: 'H', size: 40, bold: true, color: th.paper, valign: 'middle', lh: 1.25 });
+    const n = d.cards.length, gap = n === 3 ? 32 : 40, w = Math.floor((1664 - gap * (n - 1)) / n), big = n < 3;
+    d.cards.forEach((c, i) => { const x = 128 + i * (w + gap); o.card(x, 250, w, big ? 400 : 430);
+      o.label(x + 36, 286, w - 72, c.label); o.text(x + 36, 336, w - 72, 56, c.title, { font: 'H', size: big ? 40 : 36, bold: true, tag: 'h3' });
+      o.text(x + 36, big ? 420 : 410, w - 72, 250, c.text, { size: big ? 32 : 28, lh: 1.3 }); if (c.icon) o.icon(x + w - 36 - 48, 280, 48, c.icon); });
+    const by = big ? 720 : 740, bh = big ? 160 : 150;
+    o.rect(128, by, 1664, bh, { fill: th.ink, line: null });
+    o.text(168, by, 1584, bh, d.bar, { font: 'H', size: 40, bold: true, color: th.paper, valign: 'middle', lh: 1.25 });
   },
   kpi(o, d) { // 2x2 big-number cards + footnote
     o.title(d.title);
@@ -140,7 +143,8 @@ const LAYOUT = {
   closing(o, d) { // conclusion list + big thanks; chrome is "big"
     o.title(d.title); o.label(128, 330, 900, d.label || '');
     d.items.forEach((t, i) => { const y = 400 + i * 110; o.text(128, y + 4, 60, 40, String(i + 1).padStart(2, '0'), { font: 'M', size: 28, bold: true, color: th.accent }); o.text(200, y, 968, 100, t, { size: 32, lh: 1.3 }); });
-    o.text(128, 800, 1040, 130, d.thanks || 'Merci.', { font: 'H', size: 96, bold: true, lh: 1.1, tag: 'h1' });
+    if (d.question) { o.text(128, 770, 1040, 140, d.question, { font: 'H', size: 56, bold: true, lh: 1.1, tag: 'h1' }); o.text(128, 915, 1040, 36, d.thanks || 'Merci de votre attention.', { size: 28, color: th.muted }); }
+    else o.text(128, 800, 1040, 130, d.thanks || 'Merci.', { font: 'H', size: 96, bold: true, lh: 1.1, tag: 'h1' });
   },
 };
 function P_table(o, t) { o.P.push(Object.assign({ t: 'table' }, t)); }

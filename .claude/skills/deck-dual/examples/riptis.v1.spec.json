@@ -56,7 +56,7 @@
    "data": {
     "kicker": "Rapport de réalisation · Icam × Transactis",
     "title": "RIPTIS",
-    "subtitle": "Application web de centralisation des flux réseau",
+    "subtitle": "Application web : référentiel de flux réseau",
     "author": "TENEZEU VOUFO Benny Dieudonne",
     "lines": [
      "SNI4 2027 · Mars – août 2026",
@@ -64,7 +64,7 @@
      "Roger GROULT, tuteur académique"
     ]
    },
-   "notes": "Bonjour. Je présente RIPTIS, l’application web que j’ai conçue, développée et mise en production chez Transactis entre mars et août 2026, en alternance."
+   "notes": "Bonjour. Je présente RIPTIS, un référentiel de flux réseau sous forme d’application web, que j’ai conçu, développé et mis en production chez Transactis entre mars et août 2026, en alternance."
   },
   {
    "id": "plan",
@@ -269,7 +269,7 @@
    "label": "Démarche",
    "layout": "image_facts",
    "data": {
-    "title": "Un mois de décalage en fin de projet",
+    "title": "Planning prévisionnel et réalisé",
     "image": "gantt.png",
     "alt": "Planning prévisionnel et réalisé sur la même échelle de temps",
     "facts": [
@@ -283,29 +283,34 @@
      }
     ]
    },
-   "notes": "Cadrage, développement et tests sont conformes au prévisionnel. L’écart d’environ un mois a deux origines : le projet Logtis, passé en P1 devant RIPTIS, et le volume de cas particuliers découverts pendant les tests, qui a ajouté une étape de traitement et décalé la stabilisation."
+   "notes": "Cadrage, développement et tests sont conformes au prévisionnel. La mise en production est décalée d’environ un mois ; les causes sont détaillées à la diapo suivante."
   },
   {
    "id": "risk",
    "label": "Démarche",
    "layout": "callout",
    "data": {
-    "title": "Deux imprévus, un arbitrage",
+    "title": "Trois imprévus, un projet livré",
     "cards": [
      {
-      "label": "Imprévu 01",
-      "title": "Projet Logtis prioritaire",
-      "text": "Un projet Logtis, passé en P1 devant RIPTIS, a décalé les tâches de RIPTIS."
+      "label": "IMPRÉVU 01",
+      "title": "Projet Logtis en P1",
+      "text": "Un projet Logtis, passé en priorité P1 devant RIPTIS, a décalé les tâches de RIPTIS."
      },
      {
-      "label": "Imprévu 02",
+      "label": "IMPRÉVU 02",
       "title": "Fichiers hétérogènes",
       "text": "Structures variées, jusqu’à 2003. Une vingtaine de fichiers particuliers identifiés en test."
+     },
+     {
+      "label": "IMPRÉVU 03",
+      "title": "Alerte sur Nexus",
+      "text": "Une instance externe a alerté Transactis sur des vulnérabilités potentielles de Nexus, l’outil de gestion des librairies. Il a fallu cesser de l’utiliser et trouver une alternative pour installer les packages."
      }
     ],
-    "bar": "Arbitrage : privilégier la robustesse du moteur d’import plutôt que le calendrier initial."
+    "bar": "Face aux imprévus : prioriser, arbitrer et privilégier la robustesse plutôt que le calendrier initial."
    },
-   "notes": "Premier imprévu : un projet Logtis est passé en priorité P1 devant RIPTIS, ce qui a décalé les tâches de RIPTIS. Second imprévu : l’hétérogénéité des fichiers Excel. Une vingtaine de fichiers particuliers m’ont conduit à généraliser le moteur d’import plutôt que de les traiter un par un : j’ai privilégié la robustesse, avec l’accord de mon maître d’apprentissage."
+   "notes": "Premier imprévu : un projet Logtis est passé en priorité P1 devant RIPTIS, ce qui a décalé les tâches de RIPTIS. Deuxième imprévu : l’hétérogénéité des fichiers Excel ; une vingtaine de fichiers particuliers m’ont conduit à généraliser le moteur d’import plutôt que de les traiter un par un. Troisième imprévu : une instance externe a alerté Transactis sur de potentielles vulnérabilités liées à Nexus, l’outil de gestion des librairies. Il fallait cesser de l’utiliser et trouver une alternative pour installer les packages. À chaque fois, j’ai priorisé et privilégié la robustesse."
   },
   {
    "id": "app",
@@ -316,16 +321,29 @@
     "image": "dashboard.png",
     "alt": "Tableau de bord d’accueil de RIPTIS : 2 432 matrices centralisées",
     "head": "2 432 matrices",
-    "bullets": [
-     "Import Excel multi-formats",
-     "Recherche multicritère",
-     "Recherche DNS",
-     "Droits par OIDC",
-     "Export Excel",
-     "Sauvegarde PostgreSQL"
+    "groups": [
+     {
+      "label": "Socle initial",
+      "bullets": [
+       "Import Excel multi-formats",
+       "Recherche multicritère",
+       "Export Excel",
+       "Droits par OIDC",
+       "Sauvegarde PostgreSQL"
+      ]
+     },
+     {
+      "label": "Ajouts en cours de projet",
+      "bullets": [
+       "Recherche DNS",
+       "VPN",
+       "RSSI",
+       "REF IP"
+      ]
+     }
     ]
    },
-   "notes": "Sept livrables : application web, import Excel, recherche multicritère, recherche DNS, gestion des utilisateurs, export et sauvegarde. Mise en production le 20 août 2026 sur Docker, Jenkins et Kubernetes."
+   "notes": "Le socle initial : import Excel multi-formats, recherche multicritère, export, droits par OIDC et sauvegarde. En cours de projet, des modules sont venus s’ajouter : recherche DNS, VPN, RSSI et REF IP. Mise en production le 20 août 2026 sur Docker, Jenkins et Kubernetes."
   },
   {
    "id": "demo",
@@ -420,8 +438,13 @@
      ],
      [
       "Préserver les données",
-      "Sauvegarde en place, procédure à écrire",
-      "Partiel"
+      "Sauvegarde mise en place",
+      "Atteint"
+     ],
+     [
+      "Réponse < 2 secondes",
+      "Requêtes base de données rapides",
+      "Atteint"
      ],
      [
       "Recherche −70 %",
@@ -430,24 +453,19 @@
      ],
      [
       "Satisfaction ≥ 80 %",
-      "Retours positifs, sans mesure formelle",
-      "À mesurer"
-     ],
-     [
-      "Réponse < 2 secondes",
-      "Indexation PostgreSQL, à mesurer",
-      "À mesurer"
+      "Équipe très satisfaite, formulaire à venir",
+      "En cours"
      ]
     ]
    },
-   "notes": "Les objectifs de sécurité et de centralisation sont atteints. Les objectifs quantitatifs reposent encore sur des estimations : la clôture du projet doit produire les mesures définitives."
+   "notes": "Les objectifs de sécurité, de centralisation, de formats historiques, de sauvegarde et de temps de réponse des requêtes sont atteints. Côté satisfaction, mes collaborateurs trouvent l’outil génial ; un formulaire de satisfaction va permettre de le mesurer. Le gain de 70 % sur la recherche reste à chronométrer."
   },
   {
    "id": "skills",
    "label": "Bilan",
    "layout": "twocols",
    "data": {
-    "title": "Compétences et retour critique",
+    "title": "Compétences et adaptabilité",
     "left": {
      "title": "Compétences",
      "h": 580,
@@ -460,21 +478,21 @@
      ]
     },
     "right": {
-     "title": "Retour critique",
+     "title": "Adaptabilité",
      "dark": true,
      "h": 580,
      "paras": [
       {
-       "t": "Le planning initial ne prévoyait pas de marge pour les imprévus : le projet Logtis passé en P1 et les fichiers hétérogènes ont décalé la mise en production."
+       "t": "Trois imprévus (Logtis en P1, fichiers hétérogènes, alerte sur Nexus) : j’ai su prioriser, arbitrer et adapter le planning, et RIPTIS est en production."
       },
       {
-       "t": "Prévoir une marge pour les imprévus dès la construction du planning.",
+       "t": "Réflexe acquis : prévoir une marge pour les imprévus dès la construction du planning.",
        "bold": true
       }
      ]
     }
    },
-   "notes": "Techniquement, la conception du moteur d’import a été la difficulté la plus formatrice. Côté gestion de projet, mon principal retour critique : mon planning ne prévoyait pas de marge pour les imprévus. Je prévoirai cette marge dès la construction du planning."
+   "notes": "Techniquement, la conception du moteur d’import a été la difficulté la plus formatrice. Côté gestion de projet, j’ai appris à m’adapter : face à trois imprévus, j’ai priorisé et arbitré sans renoncer à la mise en production. J’en retiens un réflexe : prévoir une marge pour les imprévus dès la construction du planning."
   },
   {
    "id": "next",
@@ -504,9 +522,10 @@
      "Mise en production le 20 août 2026, avec un mois de décalage assumé pour la robustesse de l’import",
      "Une expérience de co-pilotage technique en autonomie, transférable au métier d’ingénieur"
     ],
-    "thanks": "Merci."
+    "thanks": "Merci de votre attention.",
+    "question": "Et si retrouver un flux réseau prenait 30 secondes ?"
    },
-   "notes": "RIPTIS répond au besoin identifié : centraliser des données réseau dispersées, dans le respect des contraintes d’un environnement bancaire. Mise en production le 20 août 2026. Je suis à votre disposition pour vos questions."
+   "notes": "RIPTIS répond au besoin identifié : centraliser des données réseau dispersées, dans le respect des contraintes d’un environnement bancaire. Mise en production le 20 août 2026. Je termine par une question : et si retrouver un flux réseau prenait 30 secondes ? [pause] Merci de votre attention, je suis à votre disposition pour vos questions."
   }
  ]
 }
