@@ -283,7 +283,7 @@
      }
     ]
    },
-   "notes": "Cadrage, développement et tests sont conformes au prévisionnel. L’écart d’environ un mois vient d’une seule cause : le volume de cas particuliers découverts pendant les tests, qui a ajouté une étape de traitement et décalé la stabilisation."
+   "notes": "Cadrage, développement et tests sont conformes au prévisionnel. L’écart d’environ un mois a deux origines : le projet Logtis, passé en P1 devant RIPTIS, et le volume de cas particuliers découverts pendant les tests, qui a ajouté une étape de traitement et décalé la stabilisation."
   },
   {
    "id": "risk",
@@ -294,8 +294,8 @@
     "cards": [
      {
       "label": "Imprévu 01",
-      "title": "Accès et droits",
-      "text": "Autorisations nécessaires avant de pouvoir développer et tester. Demande anticipée dès mars 2026."
+      "title": "Projet Logtis prioritaire",
+      "text": "Un projet Logtis, passé en P1 devant RIPTIS, a décalé les tâches de RIPTIS."
      },
      {
       "label": "Imprévu 02",
@@ -305,7 +305,7 @@
     ],
     "bar": "Arbitrage : privilégier la robustesse du moteur d’import plutôt que le calendrier initial."
    },
-   "notes": "Le premier imprévu a été limité par une demande d’accès anticipée. Le second m’a conduit à généraliser le moteur d’import plutôt que traiter les fichiers un par un : c’est ce choix qui explique le mois de retard, validé avec mon maître d’apprentissage."
+   "notes": "Premier imprévu : un projet Logtis est passé en priorité P1 devant RIPTIS, ce qui a décalé les tâches de RIPTIS. Second imprévu : l’hétérogénéité des fichiers Excel. Une vingtaine de fichiers particuliers m’ont conduit à généraliser le moteur d’import plutôt que de les traiter un par un : j’ai privilégié la robustesse, avec l’accord de mon maître d’apprentissage."
   },
   {
    "id": "app",
@@ -465,16 +465,16 @@
      "h": 580,
      "paras": [
       {
-       "t": "Pas de chronométrage avant/après dès le cadrage : les gains reposent sur une estimation."
+       "t": "Le planning initial ne prévoyait pas de marge pour les imprévus : le projet Logtis passé en P1 et les fichiers hétérogènes ont décalé la mise en production."
       },
       {
-       "t": "La mesure d’impact aurait dû être instrumentée dès la note de cadrage.",
+       "t": "Prévoir une marge pour les imprévus dès la construction du planning.",
        "bold": true
       }
      ]
     }
    },
-   "notes": "Techniquement, la conception du moteur d’import a été la difficulté la plus formatrice. Côté gestion de projet, ma principale limite est de ne pas avoir instrumenté la mesure d’impact dès le début."
+   "notes": "Techniquement, la conception du moteur d’import a été la difficulté la plus formatrice. Côté gestion de projet, mon principal retour critique : mon planning ne prévoyait pas de marge pour les imprévus. Je prévoirai cette marge dès la construction du planning."
   },
   {
    "id": "next",
