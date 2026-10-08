@@ -521,7 +521,7 @@
     "left": {
      "stack": [
       {
-       "title": "Côté humain",
+       "title": "Sur le plan humain",
        "tint": true,
        "h": 280,
        "bullets": [
@@ -531,7 +531,7 @@
        ]
       },
       {
-       "title": "Côté technique",
+       "title": "Sur le plan technique",
        "h": 270,
        "bullets": [
         "Conception complète d’une application web",
@@ -556,7 +556,7 @@
      "h": 580
     }
    },
-   "notes": "Je commence par le côté humain : j’ai travaillé en équipe avec le réseau, l’IT et l’Infra, écouté le besoin des utilisateurs et co-piloté le projet avec mon maître d’apprentissage. Côté technique : conception complète d’une application web, authentification OIDC, déploiement Kubernetes et moteur d’import générique. Enfin, j’ai appris à m’adapter : face à trois imprévus, j’ai priorisé et arbitré sans renoncer à la mise en production, et je retiens un réflexe : prévoir une marge pour les imprévus dès la construction du planning."
+   "notes": "Je commence par le plan humain : j’ai travaillé en équipe avec le réseau, l’IT et l’Infra, écouté le besoin des utilisateurs et co-piloté le projet avec mon maître d’apprentissage. Sur le plan technique : conception complète d’une application web, authentification OIDC, déploiement Kubernetes et moteur d’import générique. Enfin, j’ai appris à m’adapter : face à trois imprévus, j’ai priorisé et arbitré sans renoncer à la mise en production, et je retiens un réflexe : prévoir une marge pour les imprévus dès la construction du planning."
   },
   {
    "id": "next",
