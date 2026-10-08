@@ -28,7 +28,7 @@ Why this exists: exporting the web Slides deck to .pptx keeps the design but **l
 
 ## Layouts (in `scripts/build.js`, `LAYOUT`)
 
-`cover` · `cards` (2–4 cards) · `stats` (2–3 big numbers) · `statement` (dark quote) · `matrix` (weighted multicriteria matrix or plain table; `totalRow`, `boldCols`) · `twocols` (bullets | kv | paras; kv values may be `[{n,logo}]` = stack logos) · `image_list` · `images2` · `image_facts` · `callout` (2 cards + bar) · `kpi` (2×2) · `rows` (numbered; item `{t,badge}` = highlighted "validated" row) · `closing`.
+`cover` · `cards` (2–4 cards) · `stats` (2–3 big numbers) · `statement` (dark quote) · `matrix` (weighted multicriteria matrix or plain table; `totalRow`, `boldCols`) · `twocols` (bullets | kv | paras; kv values may be `[{n,logo}]` = stack logos) · `image_list` · `images2` · `showcase` (ONE screen kept for N steps: screenshots slide in/out like a carousel while the feature list grows; items with a `shot` index appear at that step, items without appear all at once in a final step; expands to N+1 slides) · `image_facts` · `callout` (2 cards + bar) · `kpi` (2×2) · `rows` (numbered; item `{t,badge}` = highlighted "validated" row) · `closing`.
 Add a layout = one function that calls the primitives (`card`, `text`, `img`, `icon`, `pic`, `title`, `label`); both formats follow automatically.
 
 ## Pitfalls learned (keep)

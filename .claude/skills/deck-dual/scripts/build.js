@@ -26,7 +26,25 @@ const FN = Object.assign({ H: 'Space Grotesk', B: 'IBM Plex Sans', M: 'JetBrains
 const FCSS = { H: `'${FN.H}', Arial, sans-serif`, B: `'${FN.B}', Arial, sans-serif`, M: `'${FN.M}', 'Courier New', monospace` };
 const gf = (n, w) => `https://fonts.googleapis.com/css2?family=${n.replace(/ /g, '+')}:wght@${w}&display=swap`;
 const faces = {}; [['H', '500..700'], ['B', '400;600'], ['M', '500;700']].forEach(([k, w]) => { faces[FN[k].toLowerCase().replace(/ /g, '-')] = { family: FN[k], href: gf(FN[k], w) }; });
-const slides = spec.slides, TOTAL = slides.length;
+// 'showcase' = ONE screen that stays while screenshots + feature list change step by step (Morph carousel). Expanded into N slides.
+function expand(list) {
+  const out = [];
+  list.forEach(s => {
+    if (s.layout !== 'showcase') return out.push(s);
+    const d = s.data, groups = d.groups, nShots = d.shots.length, rot = [0, 15, -15, 0, 30, -15, 15];
+    const withShot = g => g.items.map((it, i) => ({ ...it, g: groups.indexOf(g), i }));
+    const all = groups.flatMap(withShot);
+    for (let k = 0; k <= nShots; k++) { // steps 0..nShots-1 = one screenshot each; last step = items WITHOUT a screenshot, all at once
+      const final = k === nShots, active = final ? 0 : k;
+      const vis = all.filter(it => final || (it.shot != null && it.shot <= k));
+      const fresh = new Set(all.filter(it => final ? it.shot == null : it.shot === k).map(it => it.g + ':' + it.i));
+      out.push({ id: s.id + (k + 1), label: s.label, rot: rot[k % rot.length], layout: 'showcase_step',
+        notes: final ? d.finalNotes : d.shots[k].notes, data: { title: d.title, shots: d.shots, active, groups: groups.map((g, gi) => ({ label: g.label, items: vis.filter(it => it.g === gi).map(it => ({ t: it.t, fresh: fresh.has(it.g + ':' + it.i), key: gi + '_' + it.i })) })) } });
+    }
+  });
+  return out;
+}
+const slides = expand(spec.slides), TOTAL = slides.length;
 const ICON = { Activity: 'LuActivity', Book: 'LuBook', Chart: 'LuChartColumn', Chat: 'LuMessageSquare', Check: 'LuCheck', CheckCircle: 'LuCircleCheck', Clock: 'LuClock', Cloud: 'LuCloud', Code: 'LuCode', Database: 'LuDatabase', Globe: 'LuGlobe', GraduationCap: 'LuGraduationCap', Home: 'LuHouse', Key: 'LuKey', Lightbulb: 'LuLightbulb', Lightning: 'LuZap', Link: 'LuLink', Lock: 'LuLock', PaperPlane: 'LuSend', Play: 'LuPlay', Search: 'LuSearch', Settings: 'LuSettings', Star: 'LuStar', ThumbsUp: 'LuThumbsUp', Tool: 'LuWrench', Trust: 'LuShieldCheck', Users: 'LuUsers', Verified: 'LuBadgeCheck', Warning: 'LuTriangleAlert', Wrench: 'LuWrench' };
 
 // ---------- primitives (px, 1920x1080) ----------
@@ -140,6 +158,15 @@ const LAYOUT = {
       o.rect(224, y, 1568, 96, { fill: b ? th.tint : th.card }); o.text(256, y, b ? 1260 : 1510, 96, t, { size: 32, valign: 'middle', lh: 1.25 });
       if (b) { o.rect(1604, y + 24, 160, 48, { fill: th.accent, line: null }); o.text(1604, y + 24, 160, 48, b, { font: 'M', size: 24, bold: true, color: th.paper, align: 'center', valign: 'middle', spacing: 2 }); } });
   },
+  showcase_step(o, d) { // frame + carousel of screenshots (active one inside the frame, others parked off-slide) + accumulating list
+    o.title(d.title); o.card(128, 250, 960, 637, { name: 'shot-frame' });
+    d.shots.forEach((sh, j) => o.P.push({ t: 'img', x: 132, y: 254, w: 952, h: 629, file: sh.image, alt: sh.alt, name: 'shot-' + (j + 1),
+      park: j === d.active ? null : (j < d.active ? -1100 : 2000), hidden: j !== d.active }));
+    let y = 250;
+    d.groups.forEach((g, gi) => { if (!g.items.length) return;
+      o.text(1136, y, 656, 34, g.label, { font: 'M', size: 24, bold: true, color: th.accent, spacing: 2, upper: true, name: 'it-L' + (gi + 1) }); y += 46;
+      g.items.forEach(it => { o.text(1136, y, 656, 36, it.t, { size: 26, bold: it.fresh, color: it.fresh ? th.accent : th.ink, lh: 1.3, name: 'it-' + it.key }); y += 40; }); y += 18; });
+  },
   closing(o, d) { // conclusion list + big thanks; chrome is "big"
     o.title(d.title); o.label(128, 330, 900, d.label || '');
     d.items.forEach((t, i) => { const y = 400 + i * 110; o.text(128, y + 4, 60, 40, String(i + 1).padStart(2, '0'), { font: 'M', size: 28, bold: true, color: th.accent }); o.text(200, y, 968, 100, t, { size: 32, lh: 1.3 }); });
@@ -185,7 +212,7 @@ function html(b, i) {
     const pos = `position:absolute;left:${px(p.x)}px;top:${px(p.y)}px;`, id = p.name ? ` id="${p.name}"` : '';
     if (p.t === 'rect') return `<div${id} style="${pos}width:${px(p.w)}px;height:${px(p.h)}px;background:#${p.fill};${p.line ? `border:${p.bw}px solid #${p.line};` : ''}${p.so ? `box-shadow:${p.so}px ${p.so}px 0 #${th.ink};` : ''}${p.rot ? `transform:rotate(${p.rot}deg)` : ''}"></div>`;
     if (p.t === 'chip') return `<p${id} style="${pos}width:${p.w}px;background:#${th.ink};color:#${th.paper};border:3px solid #${th.ink};padding:8px 20px;font-family:${FCSS.M};font-size:24px;font-weight:700;letter-spacing:2px;text-transform:uppercase">${esc(p.text)}</p>`;
-    if (p.t === 'img') return `<img${id} src="${URLS[p.file] || ('/_blob/MISSING-' + p.file)}" alt="${esc(p.alt || '')}" style="${pos}width:${px(p.w)}px;height:${px(p.h)}px;object-fit:contain">`;
+    if (p.t === 'img') return `<img${id} src="${URLS[p.file] || ('/_blob/MISSING-' + p.file)}" alt="${esc(p.alt || '')}" style="${pos}width:${px(p.w)}px;height:${px(p.h)}px;object-fit:contain${p.hidden ? ';opacity:0' : ''}">`;
     if (p.t === 'icon') return `<x-icon name="${p.name}" style="${pos}width:${p.s}px;height:${p.s}px;color:#${p.color}"></x-icon>`;
     if (p.t === 'table') {
       const hd = p.head.map((h, j) => `<th style="width:${(p.colW[j] / p.w * 100).toFixed(1)}%;color:#${th.paper};text-align:${p.align[j]}">${esc(h)}</th>`).join('');
@@ -226,7 +253,7 @@ async function iconPngs() { // render used icons (Lucide) to PNG, in the colours
       const nm = p.name ? { objectName: '!!' + p.name } : {};   // "!!" forces Morph to pair same-named objects
       if (p.t === 'rect') sl.addShape(pres.shapes.RECTANGLE, Object.assign({ x: inch(p.x), y: inch(p.y), w: inch(p.w), h: inch(p.h), fill: { color: p.fill }, line: p.line ? { color: p.line, width: p.bw / 2 } : { type: 'none' } }, p.so ? { shadow: { type: 'outer', color: th.ink, blur: 0, offset: p.so / 2 * 1.414, angle: 45, opacity: 1 } } : {}, p.rot ? { rotate: p.rot } : {}, nm));
       else if (p.t === 'chip') sl.addText(p.text.toUpperCase(), Object.assign({ x: inch(p.x), y: inch(p.y), w: inch(p.w), h: inch(p.h), fontFace: FN.M, fontSize: 12, bold: true, color: th.paper, charSpacing: 2, fill: { color: th.ink }, line: { color: th.ink, width: 1.5 }, margin: [0, 10, 0, 10], valign: 'middle', isTextBox: true }, nm));
-      else if (p.t === 'img') sl.addImage(Object.assign({ path: path.join(ASSETS, p.file), x: inch(p.x), y: inch(p.y), w: inch(p.w), h: inch(p.h), altText: p.alt || '' }, nm));
+      else if (p.t === 'img') sl.addImage(Object.assign({ path: path.join(ASSETS, p.file), x: inch(p.park != null ? p.park : p.x), y: inch(p.y), w: inch(p.w), h: inch(p.h), altText: p.alt || '' }, nm));
       else if (p.t === 'icon') { const f = icons[p.name + '_' + p.color]; if (f) sl.addImage({ path: f, x: inch(p.x), y: inch(p.y), w: inch(p.s), h: inch(p.s), altText: '' }); }
       else if (p.t === 'table') {
         const bd = { type: 'solid', pt: 1.5, color: th.ink }, B = [bd, bd, bd, bd];

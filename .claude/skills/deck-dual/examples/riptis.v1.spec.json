@@ -41,7 +41,7 @@
   },
   {
    "description": "Résultats et livrables",
-   "start": "app"
+   "start": "app1"
   },
   {
    "description": "Bilan et perspectives",
@@ -315,56 +315,97 @@
   {
    "id": "app",
    "label": "Résultats",
-   "layout": "image_list",
+   "layout": "showcase",
    "data": {
     "title": "RIPTIS en production le 20 août 2026",
-    "image": "dashboard.png",
-    "alt": "Tableau de bord d’accueil de RIPTIS : 2 432 matrices centralisées",
-    "head": "2 432 matrices",
+    "shots": [
+     {
+      "image": "shot1_dashboard.png",
+      "alt": "Tableau de bord d’accueil de RIPTIS : 2 432 matrices centralisées",
+      "notes": "Voici l’accueil de RIPTIS : le tableau de bord. Les 2 432 matrices sont centralisées : 1 294 externes, 1 097 internes et 41 matrices VPN."
+     },
+     {
+      "image": "shot2_dossiers.png",
+      "alt": "Liste des dossiers : organisation par client et partenaire",
+      "notes": "Les matrices sont organisées en dossiers, par client ou par partenaire."
+     },
+     {
+      "image": "shot3_import.png",
+      "alt": "Écran d’import Excel : validation, doublons, aperçu des lignes",
+      "notes": "L’import Excel reconnaît plusieurs structures de fichiers, y compris les fichiers particuliers : c’est le moteur d’import dont je vous parlais."
+     },
+     {
+      "image": "shot4_matrix.png",
+      "alt": "Détail d’une matrice, route par route",
+      "notes": "Chaque matrice s’affiche en détail, route par route, avec la source, la destination, le port et le protocole."
+     },
+     {
+      "image": "shot5_search.png",
+      "alt": "Recherche multicritère par IP : 2 fichiers trouvés avec le détail de la route",
+      "notes": "La recherche multicritère : en cherchant une adresse IP dans toute la base, je retrouve en un instant les fichiers concernés, avec la route."
+     },
+     {
+      "image": "shot6_dns.png",
+      "alt": "Recherche DNS : adresse IPv4 et alias CNAME",
+      "notes": "La recherche DNS enrichit les résultats. C’est l’un des modules ajoutés en cours de projet."
+     }
+    ],
+    "finalNotes": "Et pour finir, les fonctionnalités sans capture : l’export Excel, les droits par OIDC et la sauvegarde PostgreSQL, puis les modules ajoutés en cours de projet : VPN, RSSI et REF IP. On les retrouve sur l’accueil.",
     "groups": [
      {
       "label": "Socle initial",
-      "bullets": [
-       "Import Excel multi-formats",
-       "Recherche multicritère",
-       "Export Excel",
-       "Droits par OIDC",
-       "Sauvegarde PostgreSQL"
+      "items": [
+       {
+        "t": "Tableau de bord",
+        "shot": 0
+       },
+       {
+        "t": "Dossiers par client / partenaire",
+        "shot": 1
+       },
+       {
+        "t": "Import Excel multi-formats",
+        "shot": 2
+       },
+       {
+        "t": "Détail d’une matrice, route par route",
+        "shot": 3
+       },
+       {
+        "t": "Recherche multicritère",
+        "shot": 4
+       },
+       {
+        "t": "Export Excel"
+       },
+       {
+        "t": "Droits par OIDC"
+       },
+       {
+        "t": "Sauvegarde PostgreSQL"
+       }
       ]
      },
      {
       "label": "Ajouts en cours de projet",
-      "bullets": [
-       "Recherche DNS",
-       "VPN",
-       "RSSI",
-       "REF IP"
+      "items": [
+       {
+        "t": "Recherche DNS",
+        "shot": 5
+       },
+       {
+        "t": "VPN"
+       },
+       {
+        "t": "RSSI"
+       },
+       {
+        "t": "REF IP"
+       }
       ]
      }
     ]
-   },
-   "notes": "Le socle initial : import Excel multi-formats, recherche multicritère, export, droits par OIDC et sauvegarde. En cours de projet, des modules sont venus s’ajouter : recherche DNS, VPN, RSSI et REF IP. Mise en production le 20 août 2026 sur Docker, Jenkins et Kubernetes."
-  },
-  {
-   "id": "demo",
-   "label": "Résultats",
-   "layout": "images2",
-   "data": {
-    "title": "Une recherche IP en quelques secondes",
-    "items": [
-     {
-      "image": "search.png",
-      "alt": "Recherche multicritère par IP : 2 fichiers trouvés avec le détail de la route",
-      "caption": "Recherche multicritère : 2 fichiers sur 2 432 matrices, route détaillée"
-     },
-     {
-      "image": "dns.png",
-      "alt": "Recherche DNS : adresse IPv4 et alias CNAME",
-      "caption": "Recherche DNS : enrichissement des résultats"
-     }
-    ]
-   },
-   "notes": "Cas réel, identifiants masqués : une recherche d’adresse IP sur l’ensemble de la base retourne instantanément les deux fichiers concernés, avec la route correspondante. La recherche DNS enrichit les résultats."
+   }
   },
   {
    "id": "kpi",
