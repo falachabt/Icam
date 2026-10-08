@@ -30,7 +30,7 @@ Why this exists: exporting the web Slides deck to .pptx keeps the design but **l
 The blue square (top right) on every slide jumps back to the plan slide; plan cards with `to:"<slide id>"` jump to the start of their section. Implemented as transparent shapes named `nav:<slide number>` + `a:hlinkClick` injected after the write. The web Slides format has no internal links.
 
 ## Chrome
-Page number card (`07 / 20`) and title card sit side by side, 8 px apart, centred text, **no dash** (user dislikes dash separators; avoid em/en dashes as separators anywhere: captions use `Figure 1 : …`).
+Page number card (`07 / 20`) and title card sit side by side, 8 px apart, centred text, **no dash**; the title card is drawn by the slide layout (one layout per section label) so Morph never animates it —  naming tricks alone (unique names) were NOT enough, Morph still paired the cards (user dislikes dash separators; avoid em/en dashes as separators anywhere: captions use `Figure 1 : …`).
 
 ## Layouts (in `scripts/build.js`, `LAYOUT`)
 

@@ -256,11 +256,14 @@ async function iconPngs() { // render used icons (Lucide) to PNG, in the colours
 (async () => {
   const icons = await iconPngs();
   const pres = new pptxgen(); pres.layout = 'LAYOUT_WIDE'; pres.title = spec.title;
+  // title card = part of the slide LAYOUT (one per section label): layout objects are never animated by Morph
+  new Set(slides.map(sl => String(sl.label || '').trim())).forEach(lb => pres.defineSlideMaster({ title: 'M_' + lb, objects: [{ text: { text: lb.toUpperCase(), options: { x: inch(306), y: inch(44), w: inch(Math.round(lb.length * 16.6) + 48), h: inch(56), fontFace: FN.M, fontSize: 12, bold: true, color: th.ink, charSpacing: 2, align: 'center', valign: 'middle', fill: { color: th.card }, line: { color: th.ink, width: 1.5 }, margin: 0 } } }] }));
   built.forEach((b, i) => {
-    const sl = pres.addSlide(); sl.background = { color: b.dark ? th.accent : th.paper };
+    const sl = pres.addSlide({ masterName: 'M_' + String(b.s.label || '').trim() }); sl.background = { color: b.dark ? th.accent : th.paper };
     b.P.forEach(p => {
       const nm = p.name ? { objectName: (p.plain ? '' : '!!') + p.name } : {};   // "!!" forces Morph to pair same-named objects
       if (p.t === 'rect') sl.addShape(pres.shapes.RECTANGLE, Object.assign({ x: inch(p.x), y: inch(p.y), w: inch(p.w), h: inch(p.h), fill: { color: p.fill }, line: p.line ? { color: p.line, width: p.bw / 2 } : { type: 'none' } }, p.so ? { shadow: { type: 'outer', color: th.ink, blur: 0, offset: p.so / 2 * 1.414, angle: 45, opacity: 1 } } : {}, p.rot ? { rotate: p.rot } : {}, nm));
+      else if (p.t === 'chip' && p.kind === 'title') { /* drawn by the layout */ }
       else if (p.t === 'chip') { const num = p.kind === 'num'; sl.addText(p.text.toUpperCase(), Object.assign({ x: inch(p.x), y: inch(p.y), w: inch(p.w), h: inch(p.h), fontFace: FN.M, fontSize: 12, bold: true, color: num ? th.paper : th.ink, charSpacing: 2, align: 'center', valign: 'middle', fill: { color: num ? th.ink : th.card }, line: { color: th.ink, width: 1.5 }, margin: 0, isTextBox: true }, nm)); }
       else if (p.t === 'nav') { const t = IDX[p.to] || IDX[p.to + '1']; if (t) sl.addShape(pres.shapes.RECTANGLE, { x: inch(p.x), y: inch(p.y), w: inch(p.w), h: inch(p.h), fill: { color: 'FFFFFF', transparency: 100 }, line: { type: 'none' }, objectName: 'nav:' + t }); } // transparent hit area; link injected after write
       else if (p.t === 'img') sl.addImage(Object.assign({ path: path.join(ASSETS, p.file), x: inch(p.park != null ? p.park : p.x), y: inch(p.y), w: inch(p.w), h: inch(p.h), altText: p.alt || '' }, nm));
