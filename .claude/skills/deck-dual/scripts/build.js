@@ -175,7 +175,8 @@ const LAYOUT = {
     o.title(d.title); o.label(128, 330, 900, d.label || '');
     d.items.forEach((t, i) => { const y = 380 + i * 100; o.text(128, y + 4, 60, 40, String(i + 1).padStart(2, '0'), { font: 'M', size: 28, bold: true, color: th.accent }); o.text(200, y, 968, 90, t, { size: 32, lh: 1.3 }); });
     if (d.question) o.text(128, 700, 1040, 110, d.question, { font: 'H', size: 44, bold: true, lh: 1.15 }); // closing contrast line
-    o.text(128, 845, 1040, 80, d.thanks || 'Merci.', { font: 'H', size: 56, bold: true, lh: 1.1, tag: 'h1' });
+    if (d.question) o.text(128, 845, 1040, 80, d.thanks || 'Merci.', { font: 'H', size: 56, bold: true, lh: 1.1, tag: 'h1' });
+    else o.text(128, 800, 1040, 130, d.thanks || 'Merci.', { font: 'H', size: 96, bold: true, lh: 1.1, tag: 'h1' });
   },
 };
 function P_table(o, t) { o.P.push(Object.assign({ t: 'table' }, t)); }
