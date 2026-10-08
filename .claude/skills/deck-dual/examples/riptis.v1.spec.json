@@ -59,7 +59,7 @@
     "subtitle": "Application web : référentiel de flux réseau",
     "author": "TENEZEU VOUFO Benny Dieudonne",
     "lines": [
-     "SNI4 2027 · Mars – août 2026",
+     "SNI4 2027 · de mars à août 2026",
      "Pierre JOCHUM, maître d’apprentissage",
      "Roger GROULT, tuteur académique"
     ]
@@ -76,22 +76,26 @@
      {
       "label": "01",
       "title": "Contexte",
-      "text": "Transactis, flux réseau et problématique"
+      "text": "Transactis, flux réseau et problématique",
+      "to": "ctx"
      },
      {
       "label": "02",
       "title": "Démarche",
-      "text": "Solutions, méthode et planning"
+      "text": "Solutions, méthode et planning",
+      "to": "sol"
      },
      {
       "label": "03",
       "title": "Résultats",
-      "text": "Livrables, démonstration et chiffres"
+      "text": "Livrables, démonstration et chiffres",
+      "to": "app"
      },
      {
       "label": "04",
       "title": "Bilan",
-      "text": "Objectifs, compétences et perspectives"
+      "text": "Objectifs, compétences et perspectives",
+      "to": "smart"
      }
     ]
    },
@@ -128,7 +132,7 @@
    "layout": "statement",
    "data": {
     "label": "Problématique retenue",
-    "quote": "Comment centraliser et rendre rapidement exploitables des données réseaux réparties dans plusieurs dizaines ou centaines de fichiers Excel hétérogènes, tout en respectant les contraintes de sécurité d’un environnement bancaire ?",
+    "quote": "Comment centraliser et rendre rapidement exploitables des données réseaux réparties dans plusieurs centaines de fichiers Excel hétérogènes, tout en respectant les contraintes de sécurité d’un environnement bancaire ?",
     "tags": [
      "Axe 1 · Centralisation",
      "Axe 2 · Sécurité"
@@ -282,7 +286,7 @@
       "value": "20 août 2026"
      }
     ],
-    "caption": "Figure – Planning prévisionnel et planning réalisé, sur la même échelle de temps"
+    "caption": "Figure : planning prévisionnel et planning réalisé, sur la même échelle de temps"
    },
    "notes": "Cadrage, développement et tests sont conformes au prévisionnel. La mise en production est décalée d’environ un mois ; les causes sont détaillées à la diapo suivante."
   },
@@ -324,37 +328,37 @@
       "image": "shot1_dashboard.png",
       "alt": "Tableau de bord d’accueil de RIPTIS : 2 432 matrices centralisées",
       "notes": "Voici l’accueil de RIPTIS : le tableau de bord. Les 2 432 matrices sont centralisées : 1 294 externes, 1 097 internes et 41 matrices VPN.",
-      "caption": "Figure 1 – Tableau de bord : 2 432 matrices centralisées"
+      "caption": "Figure 1 : tableau de bord, 2 432 matrices centralisées"
      },
      {
       "image": "shot2_dossiers.png",
       "alt": "Liste des dossiers : organisation par client et partenaire",
       "notes": "Les matrices sont organisées en dossiers, par client ou par partenaire.",
-      "caption": "Figure 2 – Liste des dossiers, organisés par client et partenaire"
+      "caption": "Figure 2 : liste des dossiers, organisés par client et partenaire"
      },
      {
       "image": "shot3_import.png",
       "alt": "Écran d’import Excel : validation, doublons, aperçu des lignes",
       "notes": "L’import Excel reconnaît plusieurs structures de fichiers, y compris les fichiers particuliers : c’est le moteur d’import dont je vous parlais.",
-      "caption": "Figure 3 – Import Excel : validation, doublons, aperçu (données masquées)"
+      "caption": "Figure 3 : import Excel, validation, doublons et aperçu (données masquées)"
      },
      {
       "image": "shot4_matrix.png",
       "alt": "Détail d’une matrice, route par route",
       "notes": "Chaque matrice s’affiche en détail, route par route, avec la source, la destination, le port et le protocole.",
-      "caption": "Figure 4 – Détail d’une matrice, route par route (données masquées)"
+      "caption": "Figure 4 : détail d’une matrice, route par route (données masquées)"
      },
      {
       "image": "shot5_search.png",
       "alt": "Recherche multicritère par IP : 2 fichiers trouvés avec le détail de la route",
       "notes": "La recherche multicritère : en cherchant une adresse IP dans toute la base, je retrouve en un instant les fichiers concernés, avec la route.",
-      "caption": "Figure 5 – Recherche par IP : fichiers et route (données masquées)"
+      "caption": "Figure 5 : recherche par IP, fichiers et route (données masquées)"
      },
      {
       "image": "shot6_dns.png",
       "alt": "Recherche DNS : adresse IPv4 et alias CNAME",
       "notes": "La recherche DNS enrichit les résultats. C’est l’un des modules ajoutés en cours de projet.",
-      "caption": "Figure 6 – Recherche DNS : IPv4 et alias CNAME (données masquées)"
+      "caption": "Figure 6 : recherche DNS, IPv4 et alias CNAME (données masquées)"
      }
     ],
     "finalNotes": "Et pour finir, les fonctionnalités sans capture : l’export Excel, les droits par OIDC et la sauvegarde PostgreSQL, puis les modules ajoutés en cours de projet : VPN, RSSI et REF IP. On les retrouve sur l’accueil.",
@@ -419,28 +423,28 @@
    "label": "Résultats",
    "layout": "kpi",
    "data": {
-    "title": "Des gains estimés à confirmer",
+    "title": "Des gains de temps concrets",
     "stats": [
      {
       "value": "30 s",
-      "text": "au lieu de 30–50 min pour retrouver une information"
+      "text": "au lieu de 30 à 50 min pour retrouver une information"
      },
      {
       "value": "−98,8 %",
-      "text": "de temps de recherche (estimation)"
+      "text": "de temps de recherche"
      },
      {
-      "value": "× 30",
-      "text": "recherches par heure : 1,5 → 120"
+      "value": "≈ 3 h",
+      "text": "économisées par semaine et par utilisateur"
      },
      {
-      "value": "≈ 21 400 €",
+      "value": "≈ 7 700 €",
       "text": "de temps libéré par an et par utilisateur (50 €/h)"
      }
     ],
-    "note": "Estimation de travail (moyenne de 40 minutes avant RIPTIS, environ 12 recherches par semaine) : aucun chronométrage n’a été réalisé avant le projet."
+    "note": "Calcul sur 4 à 5 recherches par semaine et par utilisateur : 40 minutes en moyenne avant RIPTIS, 30 secondes avec. Coût horaire indicatif de 50 €."
    },
-   "notes": "Ces chiffres sont des estimations, pas des mesures. Gain relatif = (40 − 0,5) / 40 = 98,8 %. Environ 8 heures économisées par semaine, soit 428 heures par an. Le coût horaire de 50 € est indicatif."
+   "notes": "Le gain de temps est de l’ordre de 98,8 % : de 40 minutes en moyenne à environ 30 secondes par recherche. À 4 à 5 recherches par semaine et par utilisateur, cela fait environ 3 heures économisées par semaine, soit environ 154 heures par an, et un ordre de grandeur de 7 700 euros par an et par utilisateur, avec un coût horaire indicatif de 50 euros."
   },
   {
    "id": "smart",
@@ -587,5 +591,6 @@
    },
    "notes": "RIPTIS répond au besoin identifié : centraliser des données réseau dispersées, dans le respect des contraintes d’un environnement bancaire. Mise en production le 20 août 2026. Je termine par une question : et si retrouver un flux réseau prenait 30 secondes ? [pause] Merci de votre attention, je suis à votre disposition pour vos questions."
   }
- ]
+ ],
+ "planId": "plan"
 }

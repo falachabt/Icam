@@ -26,6 +26,12 @@ Why this exists: exporting the web Slides deck to .pptx keeps the design but **l
 - Morph pairs objects that carry the **same name**; a `!!` prefix forces the pairing. `build.js` names the recurring chrome `!!mk-sq`, `!!mk-bar`, `!!mk-chip`, `!!mk-logos`, `!!mk-logo-N` and moves/resizes/rotates them per slide (big on cover/closing, small elsewhere; progress bar grows). Do not rename them in PowerPoint.
 - Web version: same idea with `data-transition="magic"` on the section and the same `id` on matching pinned elements (the Slides type calls it magic move).
 
+## Navigation (PPTX only)
+The blue square (top right) on every slide jumps back to the plan slide; plan cards with `to:"<slide id>"` jump to the start of their section. Implemented as transparent shapes named `nav:<slide number>` + `a:hlinkClick` injected after the write. The web Slides format has no internal links.
+
+## Chrome
+Page number card (`07 / 20`) and title card sit side by side, 8 px apart, centred text, **no dash** (user dislikes dash separators; avoid em/en dashes as separators anywhere: captions use `Figure 1 : …`).
+
 ## Layouts (in `scripts/build.js`, `LAYOUT`)
 
 `cover` · `cards` (2–4 cards) · `stats` (2–3 big numbers) · `statement` (dark quote) · `matrix` (weighted multicriteria matrix or plain table; `totalRow`, `boldCols`) · `twocols` (bullets | kv | paras; kv values may be `[{n,logo}]` = stack logos) · `image_list` · `images2` · `showcase` (ONE screen kept for N steps: screenshots slide in/out like a carousel while the feature list grows; items with a `shot` index appear at that step, items without appear all at once in a final step; expands to N+1 slides) · `image_facts` · `callout` (2 cards + bar) · `kpi` (2×2) · `rows` (numbered; item `{t,badge}` = highlighted "validated" row) · `closing`.

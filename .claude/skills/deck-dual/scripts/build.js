@@ -81,7 +81,7 @@ const LAYOUT = {
       o.text(x + 36, 336, w - 140, 40, c.label || '', { font: 'M', size: 28, bold: true, color: th.accent });
       o.text(x + 36, 392, w - 72, 56, c.title, { font: 'H', size: 40, bold: true, lh: 1.15, tag: 'h3' });
       o.text(x + 36, 470, w - 72, 150, c.text || '', { size: 28, color: th.muted, lh: 1.3 });
-      cardHead(o, x, 300, w, c); });
+      cardHead(o, x, 300, w, c); if (c.to) o.P.push({ t: 'nav', x, y: 300, w, h: 340, to: c.to }); }); // c.to = slide id the card jumps to (PPTX click)
   },
   stats(o, d) { // 2-3 big-number cards + optional note
     const two = d.titleLines === 2; o.title(d.title, two ? 2 : 1);
@@ -180,6 +180,7 @@ const LAYOUT = {
 };
 function P_table(o, t) { o.P.push(Object.assign({ t: 'table' }, t)); }
 const BIG = new Set(['cover', 'closing']);
+const IDX = Object.fromEntries(slides.map((sl, i) => [sl.id, i + 1])); // slide id -> 1-based index (for clickable navigation)
 
 // ---------- chrome shared by all slides (these ids/names are what Morph animates) ----------
 const ROT = [0, 15, -15, 0, 30, -15, 15];
@@ -189,7 +190,9 @@ function chrome(o, i, s, big, dark, fg) {
   o.rect(128, 992, bw, 20, { fill: dark ? th.paper : th.accent, line: fg, bw: 3, name: 'mk-bar' });
   const g = big ? { x: 1232, y: 200, w: 480, h: 480 } : { x: 1720, y: 40, w: 72, h: 72 };
   o.rect(g.x, g.y, g.w, g.h, { fill: dark ? th.paper : th.accent, so: big ? 16 : 8, rot: s.rot != null ? s.rot : (big && i === 0 ? 0 : ROT[i % ROT.length]), name: 'mk-sq' });
-  o.P.push({ t: 'chip', x: 128, y: 44, w: 560, h: 56, text: `${String(n).padStart(2, '0')} / ${TOTAL} — ${s.label || spec.sections && s.section || ''}`.replace(/ — $/, ''), name: 'mk-chip' });
+  const lab = String(s.label || '').trim(), lw = Math.round(lab.length * 16.6) + 48; // page number card + title card, side by side, 8px apart, NO dash
+  o.P.push({ t: 'chip', kind: 'num', x: 128, y: 44, w: 170, h: 56, text: `${String(n).padStart(2, '0')} / ${TOTAL}`, name: 'mk-num' });
+  o.P.push({ t: 'chip', kind: 'title', x: 306, y: 44, w: lw, h: 56, text: lab, name: 'mk-title' });
   const logos = spec.logos || []; if (!logos.length) return;
   const k = big ? 1.436 : 1, pl = big ? { x: 1232, y: 740, w: 560, h: 80 } : { x: 1290, y: 44, w: 390, h: 56 };
   o.rect(pl.x, pl.y, pl.w, pl.h, { fill: th.card, bw: 3, so: big ? 8 : 6, name: 'mk-logos' });
@@ -204,6 +207,7 @@ const built = slides.map((s, i) => {
   chrome(o, i, s, BIG.has(s.layout), dark, fg);
   if (!LAYOUT[s.layout]) throw new Error('unknown layout ' + s.layout);
   LAYOUT[s.layout](o, s.data || {});
+  if (s.id !== (spec.planId || 'plan')) P.push({ t: 'nav', x: P.find(p => p.name === 'mk-sq').x, y: P.find(p => p.name === 'mk-sq').y, w: P.find(p => p.name === 'mk-sq').w, h: P.find(p => p.name === 'mk-sq').h, to: spec.planId || 'plan' }); // blue square = back to the plan (PPTX)
   return { s, P, dark, fg };
 });
 
@@ -215,7 +219,8 @@ function html(b, i) {
   const out = P.map(p => {
     const pos = `position:absolute;left:${px(p.x)}px;top:${px(p.y)}px;`, id = p.name ? ` id="${p.name}"` : '';
     if (p.t === 'rect') return `<div${id} style="${pos}width:${px(p.w)}px;height:${px(p.h)}px;background:#${p.fill};${p.line ? `border:${p.bw}px solid #${p.line};` : ''}${p.so ? `box-shadow:${p.so}px ${p.so}px 0 #${th.ink};` : ''}${p.rot ? `transform:rotate(${p.rot}deg)` : ''}"></div>`;
-    if (p.t === 'chip') return `<p${id} style="${pos}width:${p.w}px;background:#${th.ink};color:#${th.paper};border:3px solid #${th.ink};padding:8px 20px;font-family:${FCSS.M};font-size:24px;font-weight:700;letter-spacing:2px;text-transform:uppercase">${esc(p.text)}</p>`;
+    if (p.t === 'chip') { const num = p.kind === 'num'; return `<div${id} style="${pos}width:${p.w}px;height:${p.h}px;display:flex;flex-direction:column;justify-content:center;background:#${num ? th.ink : th.card};border:3px solid #${th.ink}"><p style="font-family:${FCSS.M};font-size:24px;font-weight:700;letter-spacing:2px;text-align:center;${num ? '' : 'text-transform:uppercase;'}color:#${num ? th.paper : th.ink}">${esc(p.text)}</p></div>`; }
+    if (p.t === 'nav') return ''; // internal slide links exist only in the PPTX
     if (p.t === 'img') return `<img${id} src="${URLS[p.file] || ('/_blob/MISSING-' + p.file)}" alt="${esc(p.alt || '')}" style="${pos}width:${px(p.w)}px;height:${px(p.h)}px;object-fit:contain${p.hidden ? ';opacity:0' : ''}">`;
     if (p.t === 'icon') return `<x-icon name="${p.name}" style="${pos}width:${p.s}px;height:${p.s}px;color:#${p.color}"></x-icon>`;
     if (p.t === 'table') {
@@ -256,7 +261,8 @@ async function iconPngs() { // render used icons (Lucide) to PNG, in the colours
     b.P.forEach(p => {
       const nm = p.name ? { objectName: '!!' + p.name } : {};   // "!!" forces Morph to pair same-named objects
       if (p.t === 'rect') sl.addShape(pres.shapes.RECTANGLE, Object.assign({ x: inch(p.x), y: inch(p.y), w: inch(p.w), h: inch(p.h), fill: { color: p.fill }, line: p.line ? { color: p.line, width: p.bw / 2 } : { type: 'none' } }, p.so ? { shadow: { type: 'outer', color: th.ink, blur: 0, offset: p.so / 2 * 1.414, angle: 45, opacity: 1 } } : {}, p.rot ? { rotate: p.rot } : {}, nm));
-      else if (p.t === 'chip') sl.addText(p.text.toUpperCase(), Object.assign({ x: inch(p.x), y: inch(p.y), w: inch(p.w), h: inch(p.h), fontFace: FN.M, fontSize: 12, bold: true, color: th.paper, charSpacing: 2, fill: { color: th.ink }, line: { color: th.ink, width: 1.5 }, margin: [0, 10, 0, 10], valign: 'middle', isTextBox: true }, nm));
+      else if (p.t === 'chip') { const num = p.kind === 'num'; sl.addText(p.text.toUpperCase(), Object.assign({ x: inch(p.x), y: inch(p.y), w: inch(p.w), h: inch(p.h), fontFace: FN.M, fontSize: 12, bold: true, color: num ? th.paper : th.ink, charSpacing: 2, align: 'center', valign: 'middle', fill: { color: num ? th.ink : th.card }, line: { color: th.ink, width: 1.5 }, margin: 0, isTextBox: true }, nm)); }
+      else if (p.t === 'nav') { const t = IDX[p.to] || IDX[p.to + '1']; if (t) sl.addShape(pres.shapes.RECTANGLE, { x: inch(p.x), y: inch(p.y), w: inch(p.w), h: inch(p.h), fill: { color: 'FFFFFF', transparency: 100 }, line: { type: 'none' }, objectName: 'nav:' + t }); } // transparent hit area; link injected after write
       else if (p.t === 'img') sl.addImage(Object.assign({ path: path.join(ASSETS, p.file), x: inch(p.park != null ? p.park : p.x), y: inch(p.y), w: inch(p.w), h: inch(p.h), altText: p.alt || '' }, nm));
       else if (p.t === 'icon') { const f = icons[p.name + '_' + p.color]; if (f) sl.addImage({ path: f, x: inch(p.x), y: inch(p.y), w: inch(p.s), h: inch(p.s), altText: '' }); }
       else if (p.t === 'table') {
@@ -278,6 +284,11 @@ async function iconPngs() { // render used icons (Lucide) to PNG, in the colours
   const MORPH = '<mc:AlternateContent xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"><mc:Choice xmlns:p159="http://schemas.microsoft.com/office/powerpoint/2015/09/main" Requires="p159"><p:transition spd="slow" xmlns:p14="http://schemas.microsoft.com/office/powerpoint/2010/main" p14:dur="1200"><p159:morph option="byObject"/></p:transition></mc:Choice><mc:Fallback><p:transition spd="slow"><p:fade/></p:transition></mc:Fallback></mc:AlternateContent>';
   const zip = await JSZip.loadAsync(fs.readFileSync(raw));
   for (const f of Object.keys(zip.files)) { const m = f.match(/^ppt\/slides\/slide(\d+)\.xml$/); if (m && +m[1] >= 2) { const x = await zip.file(f).async('string'); if (!x.includes('</p:clrMapOvr>')) throw new Error('no clrMapOvr in ' + f); zip.file(f, x.replace('</p:clrMapOvr>', '</p:clrMapOvr>' + MORPH)); } }
+  for (const f of Object.keys(zip.files)) { const m = f.match(/^ppt\/slides\/slide(\d+)\.xml$/); if (!m) continue; let x = await zip.file(f).async('string'); const rn = `ppt/slides/_rels/slide${m[1]}.xml.rels`; let rels = await zip.file(rn).async('string');
+    for (const t of new Set([...x.matchAll(/name="nav:(\d+)"/g)].map(q => q[1]))) { const rid = 'rIdNav' + t;
+      rels = rels.replace('</Relationships>', `<Relationship Id="${rid}" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/slide" Target="slide${t}.xml"/></Relationships>`);
+      x = x.replace(new RegExp(`<p:cNvPr ([^>]*?)name="nav:${t}"([^>/]*?)(?:/>|></p:cNvPr>)`, 'g'), (_, a, b) => `<p:cNvPr ${a}name="nav:${t}"${b}><a:hlinkClick r:id="${rid}" action="ppaction://hlinksldjump"/></p:cNvPr>`); }
+    zip.file(f, x); zip.file(rn, rels); }
   const dst = path.join(OUT, (spec.filename || 'Presentation') + '.pptx'); fs.writeFileSync(dst, await zip.generateAsync({ type: 'nodebuffer', compression: 'DEFLATE' })); fs.unlinkSync(raw);
   console.log('web  :', path.join(OUT, 'project/deck.json'), '+', TOTAL, 'slides\npptx :', dst);
   const miss = Object.keys(URLS).length ? [] : [...new Set(built.flatMap(b => b.P.filter(p => p.t === 'img').map(p => p.file)))];
