@@ -564,20 +564,31 @@
    "data": {
     "title": "Compétences et adaptabilité",
     "left": {
-     "title": "Compétences",
-     "h": 580,
-     "bullets": [
-      "Conception complète d’une application web",
-      "Authentification OIDC et déploiement Kubernetes",
-      "Moteur d’import générique sur données hétérogènes",
-      "Co-pilotage : backlog, arbitrages, coordination",
-      "Travail en équipe : réseau, IT/Infra, maître d’apprentissage"
+     "stack": [
+      {
+       "title": "Côté humain",
+       "tint": true,
+       "h": 280,
+       "bullets": [
+        "Travail en équipe avec le réseau et l’IT/Infra",
+        "Écoute du besoin utilisateur",
+        "Co-pilotage : backlog, arbitrages, coordination"
+       ]
+      },
+      {
+       "title": "Côté technique",
+       "h": 270,
+       "bullets": [
+        "Conception complète d’une application web",
+        "Authentification OIDC et déploiement Kubernetes",
+        "Moteur d’import générique sur données hétérogènes"
+       ]
+      }
      ]
     },
     "right": {
      "title": "Adaptabilité",
      "dark": true,
-     "h": 580,
      "paras": [
       {
        "t": "Trois imprévus (Logtis en P1, fichiers hétérogènes, alerte sur Nexus) : j’ai su prioriser, arbitrer et adapter le planning, et RIPTIS est en production."
@@ -586,10 +597,11 @@
        "t": "Réflexe acquis : prévoir une marge pour les imprévus dès la construction du planning.",
        "bold": true
       }
-     ]
+     ],
+     "h": 580
     }
    },
-   "notes": "Techniquement, la conception du moteur d’import a été la difficulté la plus formatrice. Côté gestion de projet, j’ai appris à m’adapter : face à trois imprévus, j’ai priorisé et arbitré sans renoncer à la mise en production. J’en retiens un réflexe : prévoir une marge pour les imprévus dès la construction du planning."
+   "notes": "Je commence par le côté humain : j’ai travaillé en équipe avec le réseau, l’IT et l’Infra, écouté le besoin des utilisateurs et co-piloté le projet avec mon maître d’apprentissage. Côté technique : conception complète d’une application web, authentification OIDC, déploiement Kubernetes et moteur d’import générique. Enfin, j’ai appris à m’adapter : face à trois imprévus, j’ai priorisé et arbitré sans renoncer à la mise en production, et je retiens un réflexe : prévoir une marge pour les imprévus dès la construction du planning."
   },
   {
    "id": "next",

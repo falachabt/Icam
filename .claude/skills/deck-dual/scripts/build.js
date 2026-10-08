@@ -110,6 +110,8 @@ const LAYOUT = {
   twocols(o, d) { // two cards side by side; each {title, icon, dark, bullets[] | kv[[k,v]] | paras[{t,bold}]}
     o.title(d.title);
     [d.left, d.right].forEach((c, i) => { const x = 128 + i * 852, dk = !!c.dark, fg = dk ? th.paper : th.ink;
+      if (c.stack) { let yy = 250; c.stack.forEach(sc => { o.card(x, yy, 812, sc.h, sc.tint ? { fill: th.tint } : {}); // column of stacked cards, e.g. human skills first, technical below
+        o.text(x + 36, yy + 36, 740, 56, sc.title, { font: 'H', size: 40, bold: true, tag: 'h3' }); o.text(x + 36, yy + 102, 740, sc.h - 120, '', { bullets: sc.bullets, size: 28, lh: 1.25 }); yy += sc.h + 30; }); return; }
       o.card(x, 250, 812, c.h || 560, dk ? { fill: th.ink } : {});
       o.text(x + 36, 286, 660, 56, c.title, { font: 'H', size: 40, bold: true, color: fg, tag: 'h3' });
       if (c.icon) o.icon(x + 812 - 36 - 48, 282, 48, c.icon, dk ? th.paper : th.accent);
