@@ -162,7 +162,7 @@
       "align": "center"
      },
      {
-      "t": "IPAM / CMDB",
+      "t": "Outil du marché",
       "w": 295,
       "align": "center"
      },
@@ -195,7 +195,7 @@
       "2"
      ],
      [
-      "Intégration à la stack Transactis",
+      "Intégration à l’environnement Transactis",
       "×2",
       "2",
       "2",
@@ -223,20 +223,20 @@
     "conclusion": "Application interne : 29 / 33, la meilleure réponse au besoin et aux formats Transactis",
     "note": "Notation de 1 (faible) à 3 (fort), multipliée par le poids du critère."
    },
-   "notes": "Trois pistes comparées avec une matrice multicritère pondérée : garder Excel, acheter un outil IPAM/CMDB, ou développer en interne. L’application sur mesure obtient 29 points sur 33 : elle colle aux formats existants sans migration lourde et reste cohérente avec l’écosystème Transactis. Notes et poids : mon appréciation."
+   "notes": "Trois pistes comparées avec une grille de critères pondérée : garder Excel, acheter un outil du marché, ou développer en interne. L’application sur mesure obtient 29 points sur 33 : elle colle aux formats existants sans migration lourde et s’intègre à l’environnement Transactis. Notes et poids : mon appréciation."
   },
   {
    "id": "met",
    "label": "Démarche",
    "layout": "twocols",
    "data": {
-    "title": "Un MVP itératif en co-pilotage",
+    "title": "Une démarche par étapes, en co-pilotage",
     "left": {
      "title": "Méthode",
      "bullets": [
-      "Backlog priorisé avec le maître d’apprentissage",
-      "Suivi Kanban bimensuel",
-      "Cycles courts : import, recherche, permissions, DNS, export, sauvegarde",
+      "Liste de tâches priorisée avec le maître d’apprentissage",
+      "Point de suivi tous les quinze jours",
+      "Étapes courtes : import, recherche, droits d’accès, export, sauvegarde",
       "Phase de test utilisateur avant la production"
      ]
     },
@@ -266,7 +266,7 @@
      ]
     }
    },
-   "notes": "Un MVP centré sur l’import et la recherche, puis des extensions successives. Seul développeur, j’ai aussi animé la collecte du besoin avec l’équipe réseau et coordonné les accès avec l’IT et l’Infra."
+   "notes": "Une démarche par étapes : d’abord l’import et la recherche, puis des extensions successives. Seul développeur, j’ai aussi animé la collecte du besoin avec l’équipe réseau et coordonné les accès avec l’IT et l’Infra."
   },
   {
    "id": "planning",
@@ -309,13 +309,13 @@
      },
      {
       "label": "IMPRÉVU 03",
-      "title": "Alerte sur Nexus",
-      "text": "Une instance externe a alerté Transactis sur des vulnérabilités potentielles de Nexus, l’outil de gestion des librairies. Il a fallu cesser de l’utiliser et trouver une alternative pour installer les packages."
+      "title": "Contrainte réglementaire",
+      "text": "Suite à l’alerte d’une instance de contrôle sur des failles de sécurité possibles, un outil de développement a dû être abandonné et remplacé."
      }
     ],
     "bar": "Face aux imprévus : prioriser, arbitrer et privilégier la robustesse plutôt que le calendrier initial."
    },
-   "notes": "Premier imprévu : un projet Logtis est passé en priorité P1 devant RIPTIS, ce qui a décalé les tâches de RIPTIS. Deuxième imprévu : l’hétérogénéité des fichiers Excel ; une vingtaine de fichiers particuliers m’ont conduit à généraliser le moteur d’import plutôt que de les traiter un par un. Troisième imprévu : une instance externe a alerté Transactis sur de potentielles vulnérabilités liées à Nexus, l’outil de gestion des librairies. Il fallait cesser de l’utiliser et trouver une alternative pour installer les packages. À chaque fois, j’ai priorisé et privilégié la robustesse."
+   "notes": "Premier imprévu : un projet Logtis est passé en priorité P1 devant RIPTIS, ce qui a décalé les tâches de RIPTIS. Deuxième imprévu : l’hétérogénéité des fichiers Excel ; une vingtaine de fichiers particuliers m’ont conduit à rendre l’import capable de lire des fichiers très variés plutôt que de les traiter un par un. Troisième imprévu : une contrainte réglementaire ; suite à l’alerte d’une instance de contrôle sur des failles de sécurité possibles, un outil de développement a dû être abandonné et remplacé. À chaque fois, j’ai priorisé et privilégié la robustesse."
   },
   {
    "id": "app",
@@ -339,7 +339,7 @@
      {
       "image": "shot3_import.png",
       "alt": "Écran d’import Excel : validation, doublons, aperçu des lignes",
-      "notes": "L’import Excel reconnaît plusieurs structures de fichiers, y compris les fichiers particuliers : c’est le moteur d’import dont je vous parlais.",
+      "notes": "L’import Excel reconnaît plusieurs structures de fichiers, y compris les fichiers particuliers : c’est l’outil d’import dont je vous parlais.",
       "caption": "Figure 3 : import Excel, validation, doublons et aperçu (données masquées)"
      },
      {
@@ -356,12 +356,12 @@
      },
      {
       "image": "shot6_dns.png",
-      "alt": "Recherche DNS : adresse IPv4 et alias CNAME",
-      "notes": "La recherche DNS enrichit les résultats. C’est l’un des modules ajoutés en cours de projet.",
-      "caption": "Figure 6 : recherche DNS, IPv4 et alias CNAME (données masquées)"
+      "alt": "Recherche par nom de machine : adresse et alias",
+      "notes": "La recherche par nom de machine enrichit les résultats. C’est l’un des modules ajoutés en cours de projet.",
+      "caption": "Figure 6 : recherche par nom de machine (données masquées)"
      }
     ],
-    "finalNotes": "Et pour finir, les fonctionnalités sans capture : l’export Excel, les droits par OIDC et la sauvegarde PostgreSQL, puis les modules ajoutés en cours de projet : VPN, RSSI et REF IP. On les retrouve sur l’accueil.",
+    "finalNotes": "Et pour finir, les fonctionnalités sans capture : l’export Excel, l’authentification sécurisée et la sauvegarde des données, puis les modules ajoutés en cours de projet : connexions sécurisées (VPN), risques et sécurité informatique, et référentiel des adresses IP. On les retrouve sur l’accueil.",
     "groups": [
      {
       "label": "Socle initial",
@@ -390,10 +390,10 @@
         "t": "Export Excel"
        },
        {
-        "t": "Droits par OIDC"
+        "t": "Authentification sécurisée"
        },
        {
-        "t": "Sauvegarde PostgreSQL"
+        "t": "Sauvegarde des données"
        }
       ]
      },
@@ -401,17 +401,17 @@
       "label": "Ajouts en cours de projet",
       "items": [
        {
-        "t": "Recherche DNS",
+        "t": "Recherche par nom de machine",
         "shot": 5
        },
        {
-        "t": "VPN"
+        "t": "Connexions sécurisées (VPN)"
        },
        {
-        "t": "RSSI"
+        "t": "Risques et sécurité informatique"
        },
        {
-        "t": "REF IP"
+        "t": "Référentiel des adresses IP"
        }
       ]
      }
@@ -485,7 +485,7 @@
      ],
      [
       "Sécuriser l’accès",
-      "OIDC, rôles et permissions actifs",
+      "Authentification sécurisée et droits par profil",
       "Atteint"
      ],
      [
@@ -527,7 +527,7 @@
        "bullets": [
         "Travail en équipe avec le réseau et l’IT/Infra",
         "Écoute du besoin utilisateur",
-        "Co-pilotage : backlog, arbitrages, coordination"
+        "Co-pilotage : priorités, arbitrages, coordination"
        ]
       },
       {
@@ -535,8 +535,8 @@
        "h": 270,
        "bullets": [
         "Conception complète d’une application web",
-        "Authentification OIDC et déploiement Kubernetes",
-        "Moteur d’import générique sur données hétérogènes"
+        "Authentification sécurisée et mise en production",
+        "Import capable de lire des fichiers très variés"
        ]
       }
      ]
@@ -546,7 +546,7 @@
      "dark": true,
      "paras": [
       {
-       "t": "Trois imprévus (Logtis en P1, fichiers hétérogènes, alerte sur Nexus) : j’ai su prioriser, arbitrer et adapter le planning, et RIPTIS est en production."
+       "t": "Trois imprévus (Logtis en P1, fichiers hétérogènes, contrainte réglementaire) : j’ai su prioriser, arbitrer et adapter le planning, et RIPTIS est en production."
       },
       {
        "t": "Réflexe acquis : prévoir une marge pour les imprévus dès la construction du planning.",
@@ -556,7 +556,7 @@
      "h": 580
     }
    },
-   "notes": "Je commence par le plan humain : j’ai travaillé en équipe avec le réseau, l’IT et l’Infra, écouté le besoin des utilisateurs et co-piloté le projet avec mon maître d’apprentissage. Sur le plan technique : conception complète d’une application web, authentification OIDC, déploiement Kubernetes et moteur d’import générique. Enfin, j’ai appris à m’adapter : face à trois imprévus, j’ai priorisé et arbitré sans renoncer à la mise en production, et je retiens un réflexe : prévoir une marge pour les imprévus dès la construction du planning."
+   "notes": "Sur le plan humain : j’ai travaillé en équipe avec le réseau, l’IT et l’Infra, écouté le besoin des utilisateurs et co-piloté le projet avec mon maître d’apprentissage. Sur le plan technique : conception complète d’une application web, authentification sécurisée et import capable de lire des fichiers très variés. Enfin, j’ai appris à m’adapter : face à trois imprévus, j’ai priorisé et arbitré sans renoncer à la mise en production. Je retiens un réflexe : prévoir une marge pour les imprévus dès la construction du planning."
   },
   {
    "id": "next",
@@ -565,11 +565,20 @@
    "data": {
     "title": "Perspectives d’évolution",
     "items": [
-     "Formaliser la politique de sauvegarde (fréquence, conservation, tests de restauration)",
-     "Mesurer sur le terrain le temps de recherche et la satisfaction",
-     "Étendre le moteur d’import aux nouveaux formats de fichiers",
-     "Enrichir la recherche avec d’autres sources réseau, au-delà du DNS",
-     "Développer des tableaux de bord de type Grafana"
+     {
+      "t": "Étendre l’import à de nouveaux formats de fichiers"
+     },
+     {
+      "t": "Enrichir la recherche avec d’autres sources d’information réseau"
+     },
+     {
+      "t": "Formaliser la sauvegarde : fréquence, conservation, restauration",
+      "badge": "VALIDÉ"
+     },
+     {
+      "t": "Développer des tableaux de bord statistiques",
+      "badge": "VALIDÉ"
+     }
     ]
    },
    "notes": "Deux éléments sont à consolider après la fin de l’alternance : la politique de sauvegarde et la mise à jour du moteur d’import."
@@ -582,14 +591,13 @@
     "title": "Conclusion",
     "label": "À retenir",
     "items": [
-     "Un besoin réel comblé : 2 432 matrices centralisées et consultables en quelques secondes",
-     "Mise en production le 20 août 2026, avec un mois de décalage assumé pour la robustesse de l’import",
-     "Une expérience de co-pilotage technique en autonomie, transférable au métier d’ingénieur"
+     "Pour l’entreprise : un référentiel unique, consultable en quelques secondes",
+     "Pour moi : conduire un projet de bout en bout, en équipe et en autonomie",
+     "Entre l’école et l’entreprise : une expérience que je réinvestirai comme ingénieur"
     ],
-    "thanks": "Merci de votre attention.",
-    "question": "Et si retrouver un flux réseau prenait 30 secondes ?"
+    "thanks": "Merci."
    },
-   "notes": "RIPTIS répond au besoin identifié : centraliser des données réseau dispersées, dans le respect des contraintes d’un environnement bancaire. Mise en production le 20 août 2026. Je termine par une question : et si retrouver un flux réseau prenait 30 secondes ? [pause] Merci de votre attention, je suis à votre disposition pour vos questions."
+   "notes": "Pour l’entreprise, RIPTIS apporte un référentiel unique, consultable en quelques secondes. Pour moi, c’est un projet mené de bout en bout, en équipe et en autonomie. Et c’est un pont entre l’école et l’entreprise, que je réinvestirai comme ingénieur. Merci de votre attention, je suis à votre disposition pour vos questions."
   }
  ],
  "planId": "plan"
