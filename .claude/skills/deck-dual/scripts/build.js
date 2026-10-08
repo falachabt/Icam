@@ -171,11 +171,11 @@ const LAYOUT = {
       o.text(1136, y, 656, 34, g.label, { font: 'M', size: 24, bold: true, color: th.accent, spacing: 2, upper: true, name: 'it-L' + (gi + 1) }); y += 46;
       g.items.forEach(it => { o.text(1136, y, 656, 36, it.t, { size: 26, bold: it.fresh, color: it.fresh ? th.accent : th.ink, lh: 1.3, name: 'it-' + it.key }); y += 40; }); y += 18; });
   },
-  closing(o, d) { // conclusion list + big thanks; chrome is "big"
+  closing(o, d) { // takeaways (up to 3) + optional contrast line + big thanks
     o.title(d.title); o.label(128, 330, 900, d.label || '');
-    d.items.forEach((t, i) => { const y = 400 + i * 110; o.text(128, y + 4, 60, 40, String(i + 1).padStart(2, '0'), { font: 'M', size: 28, bold: true, color: th.accent }); o.text(200, y, 968, 100, t, { size: 32, lh: 1.3 }); });
-    if (d.question) { o.text(128, 770, 1040, 140, d.question, { font: 'H', size: 56, bold: true, lh: 1.1, tag: 'h1' }); o.text(128, 915, 1040, 36, d.thanks || 'Merci de votre attention.', { size: 28, color: th.muted }); }
-    else o.text(128, 800, 1040, 130, d.thanks || 'Merci.', { font: 'H', size: 96, bold: true, lh: 1.1, tag: 'h1' });
+    d.items.forEach((t, i) => { const y = 380 + i * 100; o.text(128, y + 4, 60, 40, String(i + 1).padStart(2, '0'), { font: 'M', size: 28, bold: true, color: th.accent }); o.text(200, y, 968, 90, t, { size: 32, lh: 1.3 }); });
+    if (d.question) o.text(128, 700, 1040, 110, d.question, { font: 'H', size: 44, bold: true, lh: 1.15 }); // closing contrast line
+    o.text(128, 845, 1040, 80, d.thanks || 'Merci.', { font: 'H', size: 56, bold: true, lh: 1.1, tag: 'h1' });
   },
 };
 function P_table(o, t) { o.P.push(Object.assign({ t: 'table' }, t)); }
@@ -256,14 +256,16 @@ async function iconPngs() { // render used icons (Lucide) to PNG, in the colours
 (async () => {
   const icons = await iconPngs();
   const pres = new pptxgen(); pres.layout = 'LAYOUT_WIDE'; pres.title = spec.title;
-  // title card = part of the slide LAYOUT (one per section label): layout objects are never animated by Morph
-  new Set(slides.map(sl => String(sl.label || '').trim())).forEach(lb => pres.defineSlideMaster({ title: 'M_' + lb, objects: [{ text: { text: lb.toUpperCase(), options: { x: inch(306), y: inch(44), w: inch(Math.round(lb.length * 16.6) + 48), h: inch(56), fontFace: FN.M, fontSize: 12, bold: true, color: th.ink, charSpacing: 2, align: 'center', valign: 'middle', fill: { color: th.card }, line: { color: th.ink, width: 1.5 }, margin: 0 } } }] }));
   built.forEach((b, i) => {
-    const sl = pres.addSlide({ masterName: 'M_' + String(b.s.label || '').trim() }); sl.background = { color: b.dark ? th.accent : th.paper };
+    const lab = String(b.s.label || '').trim(); // page number card + title card live in a per-slide LAYOUT: layout objects are never animated (no Morph ghosts)
+    pres.defineSlideMaster({ title: 'M_' + i, objects: [
+      { text: { text: `${String(i + 1).padStart(2, '0')} / ${TOTAL}`, options: { x: inch(128), y: inch(44), w: inch(170), h: inch(56), fontFace: FN.M, fontSize: 12, bold: true, color: th.paper, charSpacing: 2, align: 'center', valign: 'middle', fill: { color: th.ink }, line: { color: th.ink, width: 1.5 }, margin: 0 } } },
+      { text: { text: lab.toUpperCase(), options: { x: inch(306), y: inch(44), w: inch(Math.round(lab.length * 16.6) + 48), h: inch(56), fontFace: FN.M, fontSize: 12, bold: true, color: th.ink, charSpacing: 2, align: 'center', valign: 'middle', fill: { color: th.card }, line: { color: th.ink, width: 1.5 }, margin: 0 } } }] });
+    const sl = pres.addSlide({ masterName: 'M_' + i }); sl.background = { color: b.dark ? th.accent : th.paper };
     b.P.forEach(p => {
       const nm = p.name ? { objectName: (p.plain ? '' : '!!') + p.name } : {};   // "!!" forces Morph to pair same-named objects
       if (p.t === 'rect') sl.addShape(pres.shapes.RECTANGLE, Object.assign({ x: inch(p.x), y: inch(p.y), w: inch(p.w), h: inch(p.h), fill: { color: p.fill }, line: p.line ? { color: p.line, width: p.bw / 2 } : { type: 'none' } }, p.so ? { shadow: { type: 'outer', color: th.ink, blur: 0, offset: p.so / 2 * 1.414, angle: 45, opacity: 1 } } : {}, p.rot ? { rotate: p.rot } : {}, nm));
-      else if (p.t === 'chip' && p.kind === 'title') { /* drawn by the layout */ }
+      else if (p.t === 'chip') { /* number + title cards are drawn by the layout */ }
       else if (p.t === 'chip') { const num = p.kind === 'num'; sl.addText(p.text.toUpperCase(), Object.assign({ x: inch(p.x), y: inch(p.y), w: inch(p.w), h: inch(p.h), fontFace: FN.M, fontSize: 12, bold: true, color: num ? th.paper : th.ink, charSpacing: 2, align: 'center', valign: 'middle', fill: { color: num ? th.ink : th.card }, line: { color: th.ink, width: 1.5 }, margin: 0, isTextBox: true }, nm)); }
       else if (p.t === 'nav') { const t = IDX[p.to] || IDX[p.to + '1']; if (t) sl.addShape(pres.shapes.RECTANGLE, { x: inch(p.x), y: inch(p.y), w: inch(p.w), h: inch(p.h), fill: { color: 'FFFFFF', transparency: 100 }, line: { type: 'none' }, objectName: 'nav:' + t }); } // transparent hit area; link injected after write
       else if (p.t === 'img') sl.addImage(Object.assign({ path: path.join(ASSETS, p.file), x: inch(p.park != null ? p.park : p.x), y: inch(p.y), w: inch(p.w), h: inch(p.h), altText: p.alt || '' }, nm));
@@ -291,6 +293,8 @@ async function iconPngs() { // render used icons (Lucide) to PNG, in the colours
     for (const t of new Set([...x.matchAll(/name="nav:(\d+)"/g)].map(q => q[1]))) { const rid = 'rIdNav' + t;
       rels = rels.replace('</Relationships>', `<Relationship Id="${rid}" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/slide" Target="slide${t}.xml"/></Relationships>`);
       x = x.replace(new RegExp(`<p:cNvPr ([^>]*?)name="nav:${t}"([^>/]*?)(?:/>|></p:cNvPr>)`, 'g'), (_, a, b) => `<p:cNvPr ${a}name="nav:${t}"${b}><a:hlinkClick r:id="${rid}" action="ppaction://hlinksldjump"/></p:cNvPr>`); }
+    // unique default names per slide: equal default names ('Text 5') on two slides make Morph pair unrelated text boxes (ghost / duplicated words)
+    x = x.replace(/(<p:cNvPr id="\d+" name=")([^"!:][^"]*)(")/g, (mm, p1, nme, p3) => (nme.startsWith('mk-track') ? mm : p1 + nme + '-s' + m[1] + p3));
     zip.file(f, x); zip.file(rn, rels); }
   const dst = path.join(OUT, (spec.filename || 'Presentation') + '.pptx'); fs.writeFileSync(dst, await zip.generateAsync({ type: 'nodebuffer', compression: 'DEFLATE' })); fs.unlinkSync(raw);
   console.log('web  :', path.join(OUT, 'project/deck.json'), '+', TOTAL, 'slides\npptx :', dst);

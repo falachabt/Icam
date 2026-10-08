@@ -46,3 +46,6 @@ Add a layout = one function that calls the primitives (`card`, `text`, `img`, `i
 - Table cells cannot be filled in the web subset (only `tr` background) — the PPTX mirrors that (total row tinted, key column bold).
 - Don't invent data for matrices: say in the notes/footnote that scores and weights are the author's judgement, and let the user edit them.
 - Never use `localStorage`-style tricks, background processes, or claim something was verified if it was only schema-validated.
+
+## Morph ghosts (duplicated words in slideshow)
+Default object names repeat across slides (`Text 5`): Morph pairs them and cross-fades unrelated text, so words look doubled. `build.js` suffixes every unnamed object with `-s<slide>`. Never leave default names; keep persistent chrome named with the `!!` prefix. Page number + title cards are drawn by per-slide layouts so Morph never touches them.
