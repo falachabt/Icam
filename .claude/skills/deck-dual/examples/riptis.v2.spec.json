@@ -330,7 +330,8 @@
       "label": "Réalisé",
       "value": "20 août 2026"
      }
-    ]
+    ],
+    "caption": "Figure – Planning prévisionnel et planning réalisé, sur la même échelle de temps"
    },
    "notes": "Cadrage, développement et tests sont conformes au prévisionnel. La mise en production est décalée d’environ un mois ; les causes sont détaillées à la diapo suivante."
   },
@@ -371,32 +372,38 @@
      {
       "image": "shot1_dashboard.png",
       "alt": "Tableau de bord d’accueil de RIPTIS : 2 432 matrices centralisées",
-      "notes": "Voici l’accueil de RIPTIS : le tableau de bord. Les 2 432 matrices sont centralisées : 1 294 externes, 1 097 internes et 41 matrices VPN."
+      "notes": "Voici l’accueil de RIPTIS : le tableau de bord. Les 2 432 matrices sont centralisées : 1 294 externes, 1 097 internes et 41 matrices VPN.",
+      "caption": "Figure 1 – Tableau de bord : 2 432 matrices centralisées"
      },
      {
       "image": "shot2_dossiers.png",
       "alt": "Liste des dossiers : organisation par client et partenaire",
-      "notes": "Les matrices sont organisées en dossiers, par client ou par partenaire."
+      "notes": "Les matrices sont organisées en dossiers, par client ou par partenaire.",
+      "caption": "Figure 2 – Liste des dossiers, organisés par client et partenaire"
      },
      {
       "image": "shot3_import.png",
       "alt": "Écran d’import Excel : validation, doublons, aperçu des lignes",
-      "notes": "L’import Excel reconnaît plusieurs structures de fichiers, y compris les fichiers particuliers : c’est le moteur d’import dont je vous parlais."
+      "notes": "L’import Excel reconnaît plusieurs structures de fichiers, y compris les fichiers particuliers : c’est le moteur d’import dont je vous parlais.",
+      "caption": "Figure 3 – Import Excel : validation, doublons, aperçu (données masquées)"
      },
      {
       "image": "shot4_matrix.png",
       "alt": "Détail d’une matrice, route par route",
-      "notes": "Chaque matrice s’affiche en détail, route par route, avec la source, la destination, le port et le protocole."
+      "notes": "Chaque matrice s’affiche en détail, route par route, avec la source, la destination, le port et le protocole.",
+      "caption": "Figure 4 – Détail d’une matrice, route par route (données masquées)"
      },
      {
       "image": "shot5_search.png",
       "alt": "Recherche multicritère par IP : 2 fichiers trouvés avec le détail de la route",
-      "notes": "La recherche multicritère : en cherchant une adresse IP dans toute la base, je retrouve en un instant les fichiers concernés, avec la route."
+      "notes": "La recherche multicritère : en cherchant une adresse IP dans toute la base, je retrouve en un instant les fichiers concernés, avec la route.",
+      "caption": "Figure 5 – Recherche par IP : fichiers et route (données masquées)"
      },
      {
       "image": "shot6_dns.png",
       "alt": "Recherche DNS : adresse IPv4 et alias CNAME",
-      "notes": "La recherche DNS enrichit les résultats. C’est l’un des modules ajoutés en cours de projet."
+      "notes": "La recherche DNS enrichit les résultats. C’est l’un des modules ajoutés en cours de projet.",
+      "caption": "Figure 6 – Recherche DNS : IPv4 et alias CNAME (données masquées)"
      }
     ],
     "finalNotes": "Et pour finir, les fonctionnalités sans capture : l’export Excel, les droits par OIDC et la sauvegarde PostgreSQL, puis les modules ajoutés en cours de projet : VPN, RSSI et REF IP. On les retrouve sur l’accueil.",

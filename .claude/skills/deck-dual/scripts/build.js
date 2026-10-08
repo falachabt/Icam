@@ -132,6 +132,7 @@ const LAYOUT = {
   },
   image_facts(o, d) { // wide figure left + stacked fact cards right
     o.title(d.title); o.pic(128, 250, d.w || 1100, d.h || 571, d.image, d.alt);
+    if (d.caption) o.text(128, 250 + (d.h || 571) + 24, d.w || 1100, 36, d.caption, { size: 24, italic: true, color: th.muted });
     d.facts.forEach((f, i) => { const y = 250 + i * 244; o.card(1276, y, 516, 220); o.label(1312, y + 40, 440, f.label); o.text(1312, y + 100, 440, 64, f.value, { font: 'H', size: 40, bold: true }); });
   },
   callout(o, d) { // 2-3 cards + full-width ink bar
@@ -162,6 +163,7 @@ const LAYOUT = {
     o.title(d.title); o.card(128, 250, 960, 637, { name: 'shot-frame' });
     d.shots.forEach((sh, j) => o.P.push({ t: 'img', x: 132, y: 254, w: 952, h: 629, file: sh.image, alt: sh.alt, name: 'shot-' + (j + 1),
       park: j === d.active ? null : (j < d.active ? -1100 : 2000), hidden: j !== d.active }));
+    d.shots.forEach((sh, j) => { if (sh.caption) o.text(128, 910, 960, 36, sh.caption, { size: 24, italic: true, color: th.muted, lh: 1.3, name: 'cap-' + (j + 1), park: j === d.active ? null : (j < d.active ? -1100 : 2000), hidden: j !== d.active }); });
     let y = 250;
     d.groups.forEach((g, gi) => { if (!g.items.length) return;
       o.text(1136, y, 656, 34, g.label, { font: 'M', size: 24, bold: true, color: th.accent, spacing: 2, upper: true, name: 'it-L' + (gi + 1) }); y += 46;
@@ -221,7 +223,7 @@ function html(b, i) {
     }
     // text
     const tag = p.tag || 'p', wt = p.bold ? (p.font === 'B' ? 600 : 700) : 400;
-    const st = `font-family:${FCSS[p.font]};font-size:${p.size}px;font-weight:${wt};color:#${p.color};line-height:${p.lh};text-align:${p.align};${p.spacing ? `letter-spacing:${p.spacing}px;` : ''}${p.upper ? 'text-transform:uppercase;' : ''}`;
+    const st = `font-family:${FCSS[p.font]};font-size:${p.size}px;font-weight:${wt};color:#${p.color};line-height:${p.lh};text-align:${p.align};${p.spacing ? `letter-spacing:${p.spacing}px;` : ''}${p.upper ? 'text-transform:uppercase;' : ''}${p.italic ? 'font-style:italic;' : ''}${p.hidden ? 'opacity:0;' : ''}`;
     const inner = p.bullets ? `<ul style="${pos}width:${p.w}px;${st}">${p.bullets.map(b => `<li>${esc(b)}</li>`).join('')}</ul>` : null;
     if (inner) return inner;
     if (p.valign === 'middle') return `<div style="${pos}width:${p.w}px;height:${p.h}px;display:flex;flex-direction:column;justify-content:center"><${tag} style="${st}">${esc(p.text)}</${tag}></div>`;
@@ -261,7 +263,7 @@ async function iconPngs() { // render used icons (Lucide) to PNG, in the colours
         p.rows.forEach((r, k) => { const tot = p.totalRow && k === p.rows.length - 1; rows.push(r.map((c, j) => ({ text: c, options: { fontFace: FN.B, fontSize: pt(p.size), color: th.ink, bold: tot || p.boldCols.includes(j), fill: { color: tot ? th.tint : th.card }, align: p.align[j], valign: 'middle', border: B } }))); });
         sl.addTable(rows, { x: inch(p.x), y: inch(p.y), w: inch(p.w), colW: p.colW.map(inch), rowH: [inch(p.headH)].concat(p.rows.map(() => inch(p.rowH))) });
       } else { // text
-        const o = { x: inch(p.x), y: inch(p.y), w: inch(p.w), h: inch(p.h), fontFace: FN[p.font], fontSize: pt(p.size), bold: !!p.bold, color: p.color, align: p.align, valign: p.valign, margin: 0, isTextBox: true, fit: 'none', lineSpacingMultiple: p.lh / 1.2 };
+        const o = { x: inch(p.park != null ? p.park : p.x), y: inch(p.y), w: inch(p.w), h: inch(p.h), fontFace: FN[p.font], fontSize: pt(p.size), bold: !!p.bold, italic: !!p.italic, color: p.color, align: p.align, valign: p.valign, margin: 0, isTextBox: true, fit: 'none', lineSpacingMultiple: p.lh / 1.2 };
         if (p.spacing) o.charSpacing = p.spacing;
         const txt = p.bullets ? p.bullets.map((t, j) => ({ text: t, options: { bullet: { indent: 22 }, breakLine: j < p.bullets.length - 1, paraSpaceAfter: 8 } })) : (p.upper ? p.text.toUpperCase() : p.text);
         sl.addText(txt, Object.assign(o, nm));
