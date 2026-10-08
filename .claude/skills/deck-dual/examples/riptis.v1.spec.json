@@ -592,12 +592,12 @@
     "label": "À retenir",
     "items": [
      "Pour l’entreprise : un référentiel unique, consultable en quelques secondes",
-     "Pour moi : conduire un projet de bout en bout, en équipe et en autonomie",
-     "Entre l’école et l’entreprise : une expérience que je réinvestirai comme ingénieur"
+     "J’ai appris à conduire un projet de bout en bout, en équipe et en autonomie"
     ],
-    "thanks": "Merci."
+    "thanks": "Merci de votre attention.",
+    "question": "L’école apprend à comprendre. L’entreprise, à livrer."
    },
-   "notes": "Pour l’entreprise, RIPTIS apporte un référentiel unique, consultable en quelques secondes. Pour moi, c’est un projet mené de bout en bout, en équipe et en autonomie. Et c’est un pont entre l’école et l’entreprise, que je réinvestirai comme ingénieur. Merci de votre attention, je suis à votre disposition pour vos questions."
+   "notes": "Pour l’entreprise, RIPTIS apporte un référentiel unique, consultable en quelques secondes. Pour moi, c’est un projet mené de bout en bout, en équipe et en autonomie. Pour conclure : l’école apprend à comprendre, l’entreprise apprend à livrer. Merci de votre attention, je suis à votre disposition pour vos questions."
   }
  ],
  "planId": "plan"
