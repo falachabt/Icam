@@ -192,7 +192,7 @@ function chrome(o, i, s, big, dark, fg) {
   o.rect(g.x, g.y, g.w, g.h, { fill: dark ? th.paper : th.accent, so: big ? 16 : 8, rot: s.rot != null ? s.rot : (big && i === 0 ? 0 : ROT[i % ROT.length]), name: 'mk-sq' });
   const lab = String(s.label || '').trim(), lw = Math.round(lab.length * 16.6) + 48; // page number card + title card, side by side, 8px apart, NO dash
   o.P.push({ t: 'chip', kind: 'num', x: 128, y: 44, w: 170, h: 56, text: `${String(n).padStart(2, '0')} / ${TOTAL}`, name: 'mk-num' });
-  o.P.push({ t: 'chip', kind: 'title', x: 306, y: 44, w: lw, h: 56, text: lab, name: 'mk-title' });
+  o.P.push({ t: 'chip', kind: 'title', x: 306, y: 44, w: lw, h: 56, text: lab, name: 'ttl-' + n, plain: true }); // unique name + plain:true => NOT paired by Morph (no animation on the title card)
   const logos = spec.logos || []; if (!logos.length) return;
   const k = big ? 1.436 : 1, pl = big ? { x: 1232, y: 740, w: 560, h: 80 } : { x: 1290, y: 44, w: 390, h: 56 };
   o.rect(pl.x, pl.y, pl.w, pl.h, { fill: th.card, bw: 3, so: big ? 8 : 6, name: 'mk-logos' });
@@ -259,7 +259,7 @@ async function iconPngs() { // render used icons (Lucide) to PNG, in the colours
   built.forEach((b, i) => {
     const sl = pres.addSlide(); sl.background = { color: b.dark ? th.accent : th.paper };
     b.P.forEach(p => {
-      const nm = p.name ? { objectName: '!!' + p.name } : {};   // "!!" forces Morph to pair same-named objects
+      const nm = p.name ? { objectName: (p.plain ? '' : '!!') + p.name } : {};   // "!!" forces Morph to pair same-named objects
       if (p.t === 'rect') sl.addShape(pres.shapes.RECTANGLE, Object.assign({ x: inch(p.x), y: inch(p.y), w: inch(p.w), h: inch(p.h), fill: { color: p.fill }, line: p.line ? { color: p.line, width: p.bw / 2 } : { type: 'none' } }, p.so ? { shadow: { type: 'outer', color: th.ink, blur: 0, offset: p.so / 2 * 1.414, angle: 45, opacity: 1 } } : {}, p.rot ? { rotate: p.rot } : {}, nm));
       else if (p.t === 'chip') { const num = p.kind === 'num'; sl.addText(p.text.toUpperCase(), Object.assign({ x: inch(p.x), y: inch(p.y), w: inch(p.w), h: inch(p.h), fontFace: FN.M, fontSize: 12, bold: true, color: num ? th.paper : th.ink, charSpacing: 2, align: 'center', valign: 'middle', fill: { color: num ? th.ink : th.card }, line: { color: th.ink, width: 1.5 }, margin: 0, isTextBox: true }, nm)); }
       else if (p.t === 'nav') { const t = IDX[p.to] || IDX[p.to + '1']; if (t) sl.addShape(pres.shapes.RECTANGLE, { x: inch(p.x), y: inch(p.y), w: inch(p.w), h: inch(p.h), fill: { color: 'FFFFFF', transparency: 100 }, line: { type: 'none' }, objectName: 'nav:' + t }); } // transparent hit area; link injected after write
