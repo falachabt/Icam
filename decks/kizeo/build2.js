@@ -167,7 +167,7 @@ const N=S.length;
    I:(x,y,w,h,f,alt,name)=>sl.addImage(Object.assign({path:path.join(AS,f),x:inch(x),y:inch(y),w:inch(w),h:inch(h),altText:alt||''},name?{objectName:'!!'+name}:{})),
    V:(x,y,w,h)=>sl.addMedia({type:'video',path:path.join(AS,'demo.mp4'),cover:'data:image/png;base64,'+fs.readFileSync(path.join(AS,'poster.png')).toString('base64'),x:inch(x),y:inch(y),w:inch(w),h:inch(h)})};
   // décor persistant (animé par Morph) : cercle, plaques logos, barre de progression
-  sl.addShape(pres.shapes.TRIANGLE,{x:inch(1380+40*Math.sin(i)),y:inch(330+30*Math.cos(i)),w:inch(i===0?1000:900+(i%3)*20),h:inch(i===0?900:800+(i%3)*20),rotate:(i%5)*3-6,fill:{color:k.ac,transparency:s.dark?88:90},line:{type:'none'},objectName:'!!orb'});
+  sl.addShape(pres.shapes.ISOSCELES_TRIANGLE,{x:inch(1380+40*Math.sin(i)),y:inch(330+30*Math.cos(i)),w:inch(i===0?1000:900+(i%3)*20),h:inch(i===0?900:800+(i%3)*20),rotate:(i%5)*3-6,fill:{color:k.ac,transparency:s.dark?88:90},line:{type:'none'},objectName:'!!orb'});
   const big=i===0;
   const pv=big?[128,80,400,130,340,113]:[1416,56,230,78,190,63], pi=big?[548,80,220,130,140,83]:[1662,56,130,78,80,47];
   c.R(pv[0],pv[1],pv[2],pv[3],{fill:'FFFFFF',rad:0.2,name:'pv'});c.I(pv[0]+(pv[2]-pv[4])/2,pv[1]+(pv[3]-pv[5])/2,pv[4],pv[5],'vinci.png','Logo VINCI Facilities','lv');
