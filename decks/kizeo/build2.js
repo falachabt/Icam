@@ -1,7 +1,7 @@
 // Deck « Kizeo → Teepee » : identité propre (sombre/clair alterné, serif + sans, cercle mobile, barre de progression), PPTX natif + Morph.
 const fs=require('fs'),path=require('path');const pptxgen=require('pptxgenjs');const JSZip=require('jszip');
 const AS=process.argv[2],OUT=process.argv[3];const inch=v=>v/144,pt=v=>v/2;
-const FH='Georgia',FB='Calibri';
+const FH='Roboto',FB='Roboto';
 const D={bg:'0E1B24',tx:'F4F1EA',mu:'9DB0BF',pn:'15283A',ln:'2B4457',ac:'3CC3B5',wm:'F26B3A'};
 const L={bg:'F6F4EF',tx:'12202B',mu:'5A6A77',pn:'FFFFFF',ln:'D9D4C8',ac:'0F766E',wm:'D9480F'};
 const SZ={'a1_cartographie.png':[1344,772],'a5_listes.png':[1224,616],'a5_formulaire.png':[1344,536],'a5_workflow.png':[630,292],'a2_teepee_mobile.png':[1344,740],'a2_guide.png':[1344,714],'gantt.png':[1330,590],'poster.png':[1920,1080]};
@@ -161,13 +161,13 @@ const N=S.length;
   const sl=pres.addSlide({masterName:'K_'+i});sl.background={color:k.bg};
   const opt=(q)=>q.name?{objectName:'!!'+q.name}:{};
   const c={k,
-   R:(x,y,w,h,q={})=>sl.addShape(q.rad?pres.shapes.ROUNDED_RECTANGLE:pres.shapes.RECTANGLE,Object.assign({x:inch(x),y:inch(y),w:inch(w),h:inch(h),fill:q.fill?{color:q.fill,transparency:q.tr||0}:{type:'none'},line:q.line?{color:q.line,width:(q.lw||2)/2}:{type:'none'}},q.rad?{rectRadius:Math.min(0.5,q.rad)*Math.min(inch(w),inch(h))*(q.rad>=0.5?1:1)}:{},opt(q))),
+   R:(x,y,w,h,q={})=>sl.addShape(q.rad?pres.shapes.ROUNDED_RECTANGLE:pres.shapes.RECTANGLE,Object.assign({x:inch(x),y:inch(y),w:inch(w),h:inch(h),fill:q.fill?{color:q.fill,transparency:q.tr||0}:{type:'none'},line:q.line?{color:q.line,width:(q.lw||2)/2}:{type:'none'}},q.rad?{rectRadius:inch(Math.min(14,Math.min(w,h)*0.2))}:{},opt(q))),
    E:(x,y,w,h,q={})=>sl.addShape(pres.shapes.OVAL,Object.assign({x:inch(x),y:inch(y),w:inch(w),h:inch(h),fill:q.fill?{color:q.fill,transparency:q.tr||0}:{type:'none'},line:q.line?{color:q.line,width:(q.lw||2)/2}:{type:'none'}},opt(q))),
    T:(x,y,w,h,t,q={})=>sl.addText(q.up?t.toUpperCase():t,Object.assign({x:inch(x),y:inch(y),w:inch(w),h:inch(h),fontFace:q.f||FB,fontSize:pt(q.size||32),bold:!!q.bold,italic:!!q.italic,color:q.color||k.tx,align:q.align||'left',valign:q.valign||'top',margin:0,isTextBox:true,fit:'none',lineSpacingMultiple:(q.lh||1.2)/1.2},q.sp?{charSpacing:q.sp}:{},opt(q))),
    I:(x,y,w,h,f,alt,name)=>sl.addImage(Object.assign({path:path.join(AS,f),x:inch(x),y:inch(y),w:inch(w),h:inch(h),altText:alt||''},name?{objectName:'!!'+name}:{})),
    V:(x,y,w,h)=>sl.addMedia({type:'video',path:path.join(AS,'demo.mp4'),cover:'data:image/png;base64,'+fs.readFileSync(path.join(AS,'poster.png')).toString('base64'),x:inch(x),y:inch(y),w:inch(w),h:inch(h)})};
   // décor persistant (animé par Morph) : cercle, plaques logos, barre de progression
-  const o=s.orb;c.E(o[0],o[1],o[2],o[2],{fill:k.ac,tr:s.dark?88:90,name:'orb'});
+  sl.addShape(pres.shapes.TRIANGLE,{x:inch(1380+40*Math.sin(i)),y:inch(330+30*Math.cos(i)),w:inch(i===0?1000:900+(i%3)*20),h:inch(i===0?900:800+(i%3)*20),rotate:(i%5)*3-6,fill:{color:k.ac,transparency:s.dark?88:90},line:{type:'none'},objectName:'!!orb'});
   const big=i===0;
   const pv=big?[128,80,400,130,340,113]:[1416,56,230,78,190,63], pi=big?[548,80,220,130,140,83]:[1662,56,130,78,80,47];
   c.R(pv[0],pv[1],pv[2],pv[3],{fill:'FFFFFF',rad:0.2,name:'pv'});c.I(pv[0]+(pv[2]-pv[4])/2,pv[1]+(pv[3]-pv[5])/2,pv[4],pv[5],'vinci.png','Logo VINCI Facilities','lv');
